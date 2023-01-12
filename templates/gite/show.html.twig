@@ -84,12 +84,20 @@
 				<th>UpdatedAt</th>
 				<td>{{ gite.updatedAt ? gite.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
 			</tr>
+			<tr>
+				<th>Services
+				</th>
+				<td>
+					{% for giteservice in gite.giteServices %}
+						{{ giteservice.service.name }}
+						à
+						{{ giteservice.price }}
+						boules
+					{% endfor %}
+				</td>
+			</tr>
 		</tbody>
 	</table>
-	{% for giteservice in gite.GiteServices %}
-		{{giteservice.serve.name}}
-		{{ giteservice.price }}<br>
-	{% endfor %}
 
 	<a href="{{ path('app_gite_index') }}">back to list</a>
 
