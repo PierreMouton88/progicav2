@@ -18,7 +18,7 @@ class Service
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\OneToMany(mappedBy: 'service', targetEntity: GiteService::class)]
+    #[ORM\OneToMany(mappedBy: 'service', targetEntity: GiteService::class, cascade: ['persist'])]
     private Collection $giteServices;
 
     public function __construct()
@@ -72,4 +72,9 @@ class Service
 
         return $this;
     }
+    public function __toString()
+    {
+        return $this->name;
+    }
+
 }

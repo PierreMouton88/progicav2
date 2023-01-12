@@ -70,7 +70,7 @@ class Gite
     #[ORM\Column]
     private ?\DateTimeImmutable $updatedAt = null;
 
-    #[ORM\OneToMany(mappedBy: 'gite', targetEntity: GiteService::class)]
+    #[ORM\OneToMany(mappedBy: 'gite', targetEntity: GiteService::class, cascade: ['persist'])]
     private Collection $giteServices;
 
     #[ORM\ManyToMany(targetEntity: EqpInt::class, mappedBy: 'gite')]
@@ -83,7 +83,7 @@ class Gite
     private ?User $user = null;
 
     #[ORM\ManyToOne(inversedBy: 'giteContact')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?User $contact = null;
 
     public function __construct()

@@ -12,9 +12,10 @@ class GiteServiceType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('price')
+            
             ->add('service')
-            ->add('gite')
+            ->add('price')
+
         ;
     }
 

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Gite;
+use App\Entity\GiteService;
 use App\Form\GiteType;
 use App\Repository\GiteRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -25,6 +26,8 @@ class GiteController extends AbstractController
     public function new(Request $request, GiteRepository $giteRepository): Response
     {
         $gite = new Gite();
+        $giteservice = new GiteService();
+        $gite ->addGiteService($giteservice);
         $form = $this->createForm(GiteType::class, $gite);
         $form->handleRequest($request);
 

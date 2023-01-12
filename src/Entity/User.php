@@ -38,10 +38,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $phone = null;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Gite::class)]
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Gite::class,cascade: ['persist'] )]
     private Collection $gite;
 
-    #[ORM\OneToMany(mappedBy: 'contact', targetEntity: Gite::class)]
+    #[ORM\OneToMany(mappedBy: 'contact', targetEntity: Gite::class, cascade: ['persist'])]
     private Collection $giteContact;
 
     public function __construct()
