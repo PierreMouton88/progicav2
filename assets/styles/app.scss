@@ -1,5 +1,28 @@
 @import "~bootstrap/scss/bootstrap" ;
 
-body {
-    background-color: rgb(39, 144, 220);
+
+$main-color: #cbf07b;
+
+
+nav {
+    background-color: $main-color;
+}
+
+#conNav {
+    max-height: 20px;
+    padding: 0;
+    a {
+        padding: 0;        
+    }
+}
+
+main{
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    min-height: 70vh;
+}
+
+footer {
+    min-height: 80px;
+    background-color: $main-color;
 }
