@@ -54,9 +54,10 @@ class GiteController extends AbstractController
     #[Route('/{id}/edit', name: 'app_gite_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Gite $gite, GiteRepository $giteRepository): Response
     {
-        $form = $this->createForm(GiteType::class, $gite);
+        $form = $this->createForm(GiteType::class, $gite); 
+        $form->remove('createdAt');
+        $form->remove('updatedAt');
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
             $giteRepository->save($gite, true);
 
