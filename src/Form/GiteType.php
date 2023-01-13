@@ -4,6 +4,8 @@ namespace App\Form;
 
 use App\Entity\Gite;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\DateType;
+use Doctrine\DBAL\Types\Type;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -30,9 +32,7 @@ class GiteType extends AbstractType
             ->add('greenPrice')
             ->add('redPrice')
             ->add('startRed')
-            ->add('endRed')
-            // ->add('createdAt')
-            // ->add('updatedAt')
+            ->add('endRed')            
             ->add('giteServices', CollectionType::class, [
                 'allow_add' => true,
                 'entry_type' => GiteServiceType::class,

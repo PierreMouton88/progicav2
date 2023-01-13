@@ -9,6 +9,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: GiteRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Gite
 {
     #[ORM\Id]
@@ -64,9 +65,12 @@ class Gite
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $endRed = null;
 
+    
+
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
 
+    
     #[ORM\Column]
     private ?\DateTimeImmutable $updatedAt = null;
 
@@ -428,6 +432,18 @@ class Gite
 
         return $this;
     }
+    
+    #[ORM\PrePersist]
+    public function setCreatedAtValue(): void
+    {
+        $this->createdAt = new \DateTimeImmutable();
+        $this->updatedAt = new \DateTimeImmutable();
+    }
 
-   
+    #[ORM\PreUpdate]
+    public function setUpdatedAtValue(): void
+    {
+        $this->updatedAt = new \DateTimeImmutable();
+    }
+
 }
