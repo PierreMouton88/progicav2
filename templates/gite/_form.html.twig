@@ -82,13 +82,16 @@
 
 <div class="row">
 	<div class="col">
-		{{ form_row(form.giteServices, {'label': 'Services inclus'}) }}
+	
+		{{ form_row(form.giteServices[0]['service'], {'label': 'Service(s) proposé(s)'}) }}
+		{{form_row(form.giteServices[0]['price'], {'label': 'Prix du service'})}}
+	</div>
+
+	<div class="col">
+		{{ form_row(form.giteEqpExts[0]['eqpExt'], {'label': 'Equipements extérieurs inclus'}) }}
 	</div>
 	<div class="col">
-		{{ form_row(form.giteEqpExts, {'label': 'Equipements extérieurs inclus'}) }}
-	</div>
-	<div class="col">
-		{{ form_row(form.giteEqpInts, {'label': 'Equipements intérieur inclus'}) }}
+		{{ form_row(form.giteEqpInts[0]['eqpInt'], {'label': 'Equipements intérieur inclus'}) }}
 	</div>
 </div>
 

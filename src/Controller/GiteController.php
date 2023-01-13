@@ -42,7 +42,7 @@ class GiteController extends AbstractController
 
             return $this->redirectToRoute('app_gite_index', [], Response::HTTP_SEE_OTHER);
         }
-
+  
         return $this->renderForm('gite/new.html.twig', [
             'gite' => $gite,
             'form' => $form,
