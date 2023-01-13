@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Gite;
+use App\Entity\GiteEqpExt;
+use App\Entity\GiteEqpInt;
 use App\Entity\GiteService;
 use App\Form\GiteType;
 use App\Repository\GiteRepository;
@@ -28,6 +30,10 @@ class GiteController extends AbstractController
         $gite = new Gite();
         $giteservice = new GiteService();
         $gite ->addGiteService($giteservice);
+        $giteexpext = new GiteEqpExt();
+        $gite ->addGiteEqpExt($giteexpext);
+        $giteexpint = new GiteEqpInt();
+        $gite ->addGiteEqpInt($giteexpint);
         $form = $this->createForm(GiteType::class, $gite);
         $form->handleRequest($request);
 
@@ -55,8 +61,7 @@ class GiteController extends AbstractController
     public function edit(Request $request, Gite $gite, GiteRepository $giteRepository): Response
     {
         $form = $this->createForm(GiteType::class, $gite); 
-        $form->remove('createdAt');
-        $form->remove('updatedAt');
+        
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $giteRepository->save($gite, true);
