@@ -1,4 +1,96 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn btn-light">{{ button_label|default('Save') }}</button>
+
+<div class="my-custom-class-for-errors">
+	{{ form_errors(form) }}
+</div>
+
+<div class="row">
+	<div class="col">
+		{{ form_row(form.name, {'label': 'Renseignez votre titre d\'annonce'}) }}
+		<small class="mb-3">N'oubliez pas de renseigner un titre attractif</small>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col">		
+		{{ form_row(form.description, {'label': 'Description'}) }}
+	</div>
+</div>
+
+<div class="row">
+	<div class="col">
+		{{ form_row(form.address, {'label': 'Adresse'}) }}
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-4">
+		{{ form_row(form.zipcode, {'label': 'Code Postal'}) }}
+	</div>
+	<div class="col-8">
+		{{ form_row(form.city, {'label': 'Ville'}) }}
+	</div>
+</div>
+
+<div class="row">
+	<div class="col">
+		{{ form_row(form.departement, {'label': 'Departement'}) }}
+	</div>
+	<div class="col">
+		{{ form_row(form.region, {'label': 'Région'}) }}
+	</div>
+</div>
+
+<div class="row">
+	<div class="col">
+		{{ form_row(form.surface, {'label': 'Surface Totale'}) }}
+	</div>
+	<div class="col">
+		{{ form_row(form.rooms, {'label': 'Nombre de chambres'}) }}
+	</div>
+	<div class="col">
+		{{ form_row(form.beds, {'label': 'Nombre de lits'}) }}
+	</div>
+</div>
+
+<div class="row">
+	<div class="col">
+		{{ form_row(form.animalAllowed, {'label': 'Autorisez-vous les animaux ?'}) }}
+	</div>
+	<div class="col">
+		{{ form_row(form.animalFee, {'label': 'Si oui, veuillez renseigner le supplément.'}) }}
+	</div>
+</div>
+
+<div class="row">
+	<div class="col">
+		{{ form_row(form.greenPrice, {'label': 'Prix hebdomadaire'}) }}
+	</div>
+	<div class="col">
+		{{ form_row(form.redPrice, {'label': 'Prix hebdomadaire haute saison'}) }}
+	</div>
+</div>
+
+<div class="row">
+	<div class="col">
+		{{ form_row(form.startRed, {'label': 'Début saison haute'}) }}
+	</div>
+	<div class="col">
+		{{ form_row(form.endRed, {'label': 'Fin saison haute'}) }}
+	</div>
+</div>
+
+<div class="row">
+	<div class="col">
+		{{ form_row(form.giteServices, {'label': 'Services inclus'}) }}
+	</div>
+	<div class="col">
+		{{ form_row(form.giteEqpExts, {'label': 'Equipements extérieurs inclus'}) }}
+	</div>
+	<div class="col">
+		{{ form_row(form.giteEqpInts, {'label': 'Equipements intérieur inclus'}) }}
+	</div>
+</div>
+
+<button class="btn btn-light">{{ button_label|default('Sauvegarder') }}</button>
 {{ form_end(form) }}
