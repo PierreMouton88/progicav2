@@ -277,7 +277,7 @@ class Gite
         return $this->startRed;
     }
 
-    public function setStartRed(\DateTimeInterface $startRed): self
+    public function setStartRed(\DateInterval $startRed): self
     {
         $this->startRed = $startRed;
 
@@ -437,14 +437,14 @@ class Gite
     #[ORM\PrePersist]
     public function setCreatedAtValue(): void
     {
-        $this->createdAt = new \DateTimeImmutable();
-        $this->updatedAt = new \DateTimeImmutable();
+        $this->createdAt = new \DateTime();
+        $this->updatedAt = new \DateTime();
     }
 
     #[ORM\PreUpdate]
     public function setUpdatedAtValue(): void
     {
-        $this->updatedAt = new \DateTimeImmutable();
+        $this->updatedAt = new \DateTime();
     }
 
 }
