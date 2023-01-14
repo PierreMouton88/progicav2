@@ -49,11 +49,11 @@
 					<td>{{ gite.redPrice }}</td>
 					<td>{{ gite.startRed ? gite.startRed|format_datetime(locale='fr',pattern="dd MMMM YYYY") : '' }}</td>
 					<td>{{ gite.endRed ? gite.endRed|format_datetime(locale='fr',pattern="dd MMMM YYYY") : '' }}</td>
-					<td>{{ gite.createdAt ? gite.createdAt|format_datetime(locale='fr',pattern="dd MMMM YYYY") : '' }}</td>
-					<td>{{ gite.updatedAt ? gite.updatedAt|format_datetime(locale='fr',pattern="dd MMMM YYYY") : '' }}</td>
+					<td>{{ gite.createdAt ? gite.createdAt|format_datetime(locale='fr',pattern="dd MMMM YYYY HH:mm") : '' }}</td>
+					<td>{{ gite.updatedAt ? gite.updatedAt|format_datetime(locale='fr',pattern="dd MMMM YYYY HH:mm") : '' }}</td>
 					<td>
-						<a href="{{ path('app_gite_show', {'id': gite.id}) }}">show</a>
-						<a href="{{ path('app_gite_edit', {'id': gite.id}) }}">edit</a>
+						<a class="btn btn-outline-info" href="{{ path('app_gite_show', {'id': gite.id}) }}">detail</a>
+						<a class="btn btn-outline-warning" href="{{ path('app_gite_edit', {'id': gite.id}) }}">modifier</a>
 					</td>
 				</tr>
 			{% else %}
