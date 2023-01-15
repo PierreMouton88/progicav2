@@ -7,13 +7,16 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: GiteRepository::class)]
 #[ORM\HasLifecycleCallbacks]
+#[Vich\Uploadable]
 class Gite
 {
     #[ORM\Id]
-    #[ORM\GeneratedValue]
+    #[ORM\GeneratedValue(strategy: 'AUTO')]
     #[ORM\Column]
     private ?int $id = null;
 
@@ -65,12 +68,21 @@ class Gite
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $endRed = null;
 
-    
+    #[Vich\UploadableField(mapping: 'products', fileNameProperty: 'imageName', size: 'imageSize')]
+    private ?File $imageFile = null;
+
+    #[ORM\Column(type: 'string')]
+    private ?string $imageName = null;
+
+    #[ORM\Column(type: 'integer')]
+    private ?int $imageSize = null;
+
+    #[ORM\Column(type: 'datetime')]
+    private ?\DateTimeInterface $imageUpdatedAt = null;
 
     #[ORM\Column]
     private ?\DateTime $createdAt = null;
 
-    
     #[ORM\Column]
     private ?\DateTime $updatedAt = null;
 
@@ -78,7 +90,7 @@ class Gite
     private Collection $giteServices;
 
     #[ORM\ManyToOne(inversedBy: 'gite', cascade: ['persist'])]
-    #[ORM\JoinColumn(onDelete:"CASCADE")]
+    #[ORM\JoinColumn(onDelete: "CASCADE")]
     private ?User $user = null;
 
     #[ORM\ManyToOne(inversedBy: 'giteContact', cascade: ['persist'])]
@@ -95,7 +107,7 @@ class Gite
     {
         $this->giteServices = new ArrayCollection();
         $this->giteEqpExts = new ArrayCollection();
-        $this->giteEqpInts = new ArrayCollection();        
+        $this->giteEqpInts = new ArrayCollection();
     }
 
 
@@ -277,7 +289,7 @@ class Gite
         return $this->startRed;
     }
 
-    public function setStartRed(\DateInterval $startRed): self
+    public function setStartRed(\DateTimeInterface $startRed): self
     {
         $this->startRed = $startRed;
 
@@ -433,7 +445,43 @@ class Gite
 
         return $this;
     }
-    
+
+    public function setImageFile(?File $imageFile = null): void
+    {
+        $this->imageFile = $imageFile;
+
+        if (null !== $imageFile) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->imageUpdatedAt = new \DateTimeImmutable();
+        }
+    }
+
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    public function setImageName(?string $imageName): void
+    {
+        $this->imageName = $imageName;
+    }
+
+    public function getImageName(): ?string
+    {
+        return $this->imageName;
+    }
+
+    public function setImageSize(?int $imageSize): void
+    {
+        $this->imageSize = $imageSize;
+    }
+
+    public function getImageSize(): ?int
+    {
+        return $this->imageSize;
+    }
+
     #[ORM\PrePersist]
     public function setCreatedAtValue(): void
     {
@@ -446,5 +494,4 @@ class Gite
     {
         $this->updatedAt = new \DateTime();
     }
-
 }

@@ -82,7 +82,7 @@
 
 <div class="row">
 	<div class="col">
-	
+
 		{{ form_row(form.giteServices[0]['service'], {'label': 'Service(s) proposé(s)'}) }}
 		{{form_row(form.giteServices[0]['price'], {'label': 'Prix du service'})}}
 	</div>
@@ -92,6 +92,12 @@
 	</div>
 	<div class="col">
 		{{ form_row(form.giteEqpInts[0]['eqpInt'], {'label': 'Equipements intérieur inclus'}) }}
+	</div>
+</div>
+
+<div class="row">
+	<div class="col">
+		{{ form_row(form.imageFile, {'label': 'Photo de votre bien'}) }}
 	</div>
 </div>
 
