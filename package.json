@@ -4,9 +4,11 @@
     "@babel/preset-env": "^7.16.0",
     "@hotwired/stimulus": "^3.0.0",
     "@symfony/stimulus-bridge": "^3.2.0",
+    "@symfony/ux-cropperjs": "file:vendor/symfony/ux-cropperjs/assets",
     "@symfony/webpack-encore": "^4.0.0",
     "bootstrap": "^5.2.3",
     "core-js": "^3.23.0",
+    "cropperjs": "^1.5.9",
     "regenerator-runtime": "^0.13.9",
     "sass-loader": "^13.0.0",
     "webpack": "^5.74.0",
@@ -22,6 +24,7 @@
     "build": "encore production --progress"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^6.2.1",
     "sass-embedded": "^1.57.1"
   }
 }
