@@ -6,6 +6,7 @@ use App\Entity\Gite;
 use App\Entity\GiteEqpExt;
 use App\Entity\GiteEqpInt;
 use App\Entity\GiteService;
+use App\Entity\User;
 use App\Form\GiteType;
 use App\Repository\GiteRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -30,18 +31,20 @@ class GiteController extends AbstractController
     public function new(Request $request, GiteRepository $giteRepository): Response
     {
         $gite = new Gite();
+        
         $giteservice = new GiteService();
         $gite->addGiteService($giteservice);
         $giteexpext = new GiteEqpExt();
         $gite->addGiteEqpExt($giteexpext);
         $giteexpint = new GiteEqpInt();
         $gite->addGiteEqpInt($giteexpint);
+
         $form = $this->createForm(GiteType::class, $gite);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $gite->setUser(($this->getUser()));
             $giteRepository->save($gite, true);
-
             return $this->redirectToRoute('app_gite_index', [], Response::HTTP_SEE_OTHER);
         }
 

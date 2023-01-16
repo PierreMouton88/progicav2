@@ -21,6 +21,7 @@ class GiteType extends AbstractType
     {
         $builder
             ->add('name')
+
             ->add('description')
             ->add('address')
             ->add('city')
