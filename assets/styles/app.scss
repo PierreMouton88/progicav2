@@ -3,15 +3,26 @@
 @import "~bootstrap/scss/bootstrap";
 // @import "~fontawesome/scss/fontawesome";
 $fa-font-path: "~Font-Awesome/webfonts";
+@import url("https://fonts.googleapis.com/css2?family=Arapey&display=swap");
 
-$main-color: #5271ff;
+$main-color: #704cff;
+$text-color: #eee;
 
 .lime {
   color: $main-color;
 }
 
+.arapey {
+  font-family: "Arapey", serif;
+}
+
 nav {
   background-color: $main-color;
+  color: $text-color;
+  img {
+    max-height: 50px;
+    width: 70px;
+  }
 }
 
 #conNav {
@@ -23,9 +34,60 @@ nav {
 }
 
 main {
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-  min-height: 70vh;
+  min-height: 75vh;
+}
+
+#front {
+  margin: 0;
+  // background-image: url("../images/our_images/frontPage.jpg");
+  h1 {
+    position: relative;
+    top: 70%;
+    z-index: 100;
+    font-family: "Arapey", serif;
+    font-size: 6rem;
+    margin: 0, 10px;
+    color: $text-color;
+  }
+  h3 {
+    margin-top: 50px;
+    position: relative;
+    z-index: 200;
+    color: $text-color;
+  }
+  h2 {
+    position: relative;
+    z-index: 200;
+    color: $text-color;
+  }
+  button {
+    margin-top: 30px;
+    position: relative;
+    left: 42.5%;
+    z-index: 200;
+    border: 3px solid $text-color;
+    border-radius: 0;
+    width: 15%;
+    background-color: $main-color;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    -ms-border-radius: 0;
+    -o-border-radius: 0;
+    a {
+      color: $text-color;
+      text-decoration: none;
+    }
+  }
+  section {
+    margin: 0;
+    padding: 0;
+    img {
+      height: 81.8vh;
+      margin: 0;
+      position: absolute;
+      top: 76px;
+    }
+  }
 }
 
 h1 {
@@ -33,9 +95,13 @@ h1 {
   margin-bottom: 4rem;
   color: $main-color;
   margin-left: auto;
+  text-align: center;
 }
 
 footer {
   min-height: 80px;
   background-color: $main-color;
+  p {
+    color: $text-color;
+  }
 }
