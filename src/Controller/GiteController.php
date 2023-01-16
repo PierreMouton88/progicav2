@@ -13,6 +13,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+use function PHPSTORM_META\type;
+
 #[Route('/gite')]
 class GiteController extends AbstractController
 {
@@ -29,11 +31,11 @@ class GiteController extends AbstractController
     {
         $gite = new Gite();
         $giteservice = new GiteService();
-        $gite ->addGiteService($giteservice);
+        $gite->addGiteService($giteservice);
         $giteexpext = new GiteEqpExt();
-        $gite ->addGiteEqpExt($giteexpext);
+        $gite->addGiteEqpExt($giteexpext);
         $giteexpint = new GiteEqpInt();
-        $gite ->addGiteEqpInt($giteexpint);
+        $gite->addGiteEqpInt($giteexpint);
         $form = $this->createForm(GiteType::class, $gite);
         $form->handleRequest($request);
 
@@ -42,7 +44,7 @@ class GiteController extends AbstractController
 
             return $this->redirectToRoute('app_gite_index', [], Response::HTTP_SEE_OTHER);
         }
-  
+
         return $this->renderForm('gite/new.html.twig', [
             'gite' => $gite,
             'form' => $form,
@@ -52,16 +54,20 @@ class GiteController extends AbstractController
     #[Route('/{id}', name: 'app_gite_show', methods: ['GET'])]
     public function show(Gite $gite): Response
     {
-        return $this->render('gite/show.html.twig', [
-            'gite' => $gite,
-        ]);
+        if ($gite) {
+            return $this->render('gite/show.html.twig', [
+                'gite' => $gite,
+            ]);
+        } else {
+            $this->addFlash('error', "Cet ID n'appartient à aucun gîte.");
+        }
     }
 
     #[Route('/{id}/edit', name: 'app_gite_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Gite $gite, GiteRepository $giteRepository): Response
     {
-        $form = $this->createForm(GiteType::class, $gite); 
-        
+        $form = $this->createForm(GiteType::class, $gite);
+
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $giteRepository->save($gite, true);
@@ -78,7 +84,7 @@ class GiteController extends AbstractController
     #[Route('/{id}', name: 'app_gite_delete', methods: ['POST'])]
     public function delete(Request $request, Gite $gite, GiteRepository $giteRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$gite->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $gite->getId(), $request->request->get('_token'))) {
             $giteRepository->remove($gite, true);
         }
 
