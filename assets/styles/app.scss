@@ -1,28 +1,41 @@
-@import "~bootstrap/scss/bootstrap" ;
+// customize some Bootstrap variables
 
+@import "~bootstrap/scss/bootstrap";
+// @import "~fontawesome/scss/fontawesome";
+$fa-font-path: "~Font-Awesome/webfonts";
 
 $main-color: #cbf07b;
 
+.lime {
+  color: $main-color;
+}
 
 nav {
-    background-color: $main-color;
+  background-color: $main-color;
 }
 
 #conNav {
-    max-height: 20px;
+  max-height: 20px;
+  padding: 0;
+  a {
     padding: 0;
-    a {
-        padding: 0;        
-    }
+  }
 }
 
-main{
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-    min-height: 70vh;
+main {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  min-height: 70vh;
+}
+
+h1 {
+  margin-top: 4rem;
+  margin-bottom: 4rem;
+  color: $main-color;
+  margin-left: auto;
 }
 
 footer {
-    min-height: 80px;
-    background-color: $main-color;
+  min-height: 80px;
+  background-color: $main-color;
 }

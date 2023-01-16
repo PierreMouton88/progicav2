@@ -10,10 +10,10 @@ use Doctrine\DBAL\Types\Type;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-use Symfony\Component\Form\Extension\Core\Type\DateIntervalType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType as TypeDateTimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichFileType;
 
 class GiteType extends AbstractType
 {
@@ -34,39 +34,38 @@ class GiteType extends AbstractType
             ->add('animalFee')
             ->add('greenPrice')
             ->add('redPrice')
-            ->add('startRed', DateIntervalType::class, [
-                'widget'      => 'choice', // render a text field for each part
-                'input'    => 'string',  // if you want the field to return a ISO 8601 string back to you
-            
-                // customize which text boxes are shown
-                'with_years'  => false,
-                'with_months' => true,
-                'with_days'   => false,
-                'with_hours'  => false,
+            ->add('startRed', TypeDateTimeType::class, [
+                'placeholder' => [
+                    'year' => 'Year', 'month' => 'Mois', 'day' => 'Jour',
+                    'date_widget' => 'single_text',
+                    'with_hours' => false,
+                    'with_minutes' => false,
+                ],
             ])
             ->add('endRed', TypeDateTimeType::class, [
                 'placeholder' => [
                     'year' => 'Year', 'month' => 'Mois', 'day' => 'Jour',
                     'date_widget' => 'single_text',
+                    'with_hours' => false,
                     'with_minutes' => false,
                 ],
-            ])            
+            ])
             ->add('giteServices', CollectionType::class, [
                 'allow_add' => true,
                 'entry_type' => GiteServiceType::class,
-                
+
             ])
             ->add('giteEqpExts', CollectionType::class, [
                 'allow_add' => true,
                 'entry_type' => GiteEqpExtType::class,
-                
+
             ])
             ->add('giteEqpInts', CollectionType::class, [
                 'allow_add' => true,
                 'entry_type' => GiteEqpIntType::class,
-                
+
             ])
-            ;
+            ->add('imageFile', VichFileType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
