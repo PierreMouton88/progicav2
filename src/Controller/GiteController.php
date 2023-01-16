@@ -42,6 +42,7 @@ class GiteController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $giteRepository->save($gite, true);
 
+            $this->addFlash('success', "Votre bien a bien été ajouté");
             return $this->redirectToRoute('app_gite_index', [], Response::HTTP_SEE_OTHER);
         }
 

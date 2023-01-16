@@ -16,32 +16,31 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-        ->add('email', EmailType::class,[
-            'constraints' => [
-                new NotBlank([
-                    'message' => 'Merci d\'entrer un e-mail',
-                ]),
-            ],
-            'required' => true,
-            'attr' => ['class' =>'form-control'],
-        ])
+            ->add('email', EmailType::class, [
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Merci d\'entrer un e-mail',
+                    ]),
+                ],
+                'required' => true,
+                'attr' => ['class' => 'form-control'],
+            ])
 
             ->add('firstName')
             ->add('lastName')
-            ->add('phone')
-        ;
-        if ($user['roles'] = 'ROLE_ADMIN'){
-        $builder->add('roles', ChoiceType::class, [
-            'choices' => [
-                'Utilisateur' => 'ROLE_USER',
-                'Propriétaire' => 'ROLE_OWNER',
-                'Administrateur' => 'ROLE_ADMIN'
-            ],
-            'expanded' => true,
-            'multiple' => true,
-            'label' => 'Rôles' 
-        ]);
-    }
+            ->add('phone');
+        if ($user['roles'] = 'ROLE_ADMIN') {
+            $builder->add('roles', ChoiceType::class, [
+                'choices' => [
+                    'Utilisateur' => 'ROLE_USER',
+                    'Propriétaire' => 'ROLE_OWNER',
+                    'Administrateur' => 'ROLE_ADMIN'
+                ],
+                'expanded' => true,
+                'multiple' => true,
+                'label' => 'Rôles'
+            ]);
+        }
     }
 
     public function configureOptions(OptionsResolver $resolver): void
