@@ -33,9 +33,8 @@ class RegistrationController extends AbstractController
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
-            // encode the plain password
+            if ($form->get('owner')->getData()){ $user->setRoles(['ROLE_OWNER']);}
             $user->setPassword(
                 $userPasswordHasher->hashPassword(
                     $user,
@@ -50,7 +49,7 @@ class RegistrationController extends AbstractController
             $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
                 (new TemplatedEmail())
                     ->from(new Address('no-reply@progica.com', 'Progica'))
-                    ->to($user->getEmail())
+                    ->to($user->getEmail()) 
                     ->subject('Please Confirm your Email')
                     ->htmlTemplate('registration/confirmation_email.html.twig')
             );

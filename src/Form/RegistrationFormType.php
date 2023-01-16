@@ -43,6 +43,10 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
+            ->add('owner', CheckboxType::class, [
+                'mapped' => false
+            ])
+            
             ->add('firstName')
             ->add('lastName')
             ->add('phone')
