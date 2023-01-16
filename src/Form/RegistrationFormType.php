@@ -44,7 +44,8 @@ class RegistrationFormType extends AbstractType
                 ],
             ])
             ->add('owner', CheckboxType::class, [
-                'mapped' => false
+                'mapped' => false,
+                'required' => false,
             ])
             
             ->add('firstName')
