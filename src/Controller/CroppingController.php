@@ -15,12 +15,12 @@ class CroppingController extends AbstractController
     #[Route('/cropping', name: 'app_cropping')]
     public function index(CropperInterface $cropper, Request $request): Response
     {
-        $crop = $cropper->createCrop('/server/path/to/the/image.jpg');
+        $crop = $cropper->createCrop('/images/our_images/first_slide2.jpg');
         $crop->setCroppedMaxSize(1500, 1500);
 
         $form = $this->createFormBuilder(['crop' => $crop])
             ->add('crop', CropperType::class, [
-                'public_url' => '/images/Placeholder.svg',
+                'public_url' => '/images/our_images/first_slide.jpg',
                 'cropper_options' => [
                     'aspectRatio' => 1500 / 1500,
                 ],
@@ -32,7 +32,7 @@ class CroppingController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             // Get the cropped image data (as a string)
             $crop->getCroppedImage();
-
+            dd($crop);
             // Create a thumbnail of the cropped image (as a string)
             $crop->getCroppedThumbnail(150, 150);
 
