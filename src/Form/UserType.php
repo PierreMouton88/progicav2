@@ -14,7 +14,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 class UserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
-    {
+    {   
         $builder
             ->add('email', EmailType::class, [
                 'constraints' => [
@@ -41,6 +41,21 @@ class UserType extends AbstractType
                 'label' => 'Rôles'
             ]);
         }
+            ->add('phone')
+        ;
+        
+        if ($user['roles'] = 'ROLE_ADMIN'){
+        $builder->add('roles', ChoiceType::class, [
+            'choices' => [
+                'Utilisateur' => 'ROLE_USER',
+                'Propriétaire' => 'ROLE_OWNER',
+                'Administrateur' => 'ROLE_ADMIN'
+            ],
+            'expanded' => true,
+            'multiple' => true,
+            'label' => 'Rôles' 
+        ]);
+    }
     }
 
     public function configureOptions(OptionsResolver $resolver): void

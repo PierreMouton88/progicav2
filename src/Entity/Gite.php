@@ -482,6 +482,12 @@ class Gite
         return $this->imageSize;
     }
 
+    // #[ORM\PrePersist]
+    // public function setUserId(): void
+    // {
+    //     $this->user = $user;
+    // }
+
     #[ORM\PrePersist]
     public function setCreatedAtValue(): void
     {
