@@ -64,4 +64,5 @@ class GiteService
 
         return $this;
     }
+    
 }

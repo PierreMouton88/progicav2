@@ -63,10 +63,10 @@ class Gite
     private ?float $redPrice = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $startRed = null;
+    private ?\DateTimeImmutable $startRed = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $endRed = null;
+    private ?\DateTimeImmutable $endRed = null;
 
     #[Vich\UploadableField(mapping: 'products', fileNameProperty: 'imageName', size: 'imageSize')]
     private ?File $imageFile = null;
@@ -78,7 +78,7 @@ class Gite
     private ?int $imageSize = null;
 
     #[ORM\Column(type: 'datetime')]
-    private ?\DateTimeInterface $imageUpdatedAt = null;
+    private ?\DateTime $imageUpdatedAt = null;
 
     #[ORM\Column]
     private ?\DateTime $createdAt = null;
@@ -102,6 +102,7 @@ class Gite
 
     #[ORM\OneToMany(mappedBy: 'gite', targetEntity: GiteEqpInt::class, cascade: ['persist'])]
     private Collection $giteEqpInts;
+
 
     public function __construct()
     {
@@ -284,24 +285,24 @@ class Gite
         return $this;
     }
 
-    public function getStartRed(): ?\DateTimeInterface
+    public function getStartRed(): ?\DateTimeImmutable
     {
         return $this->startRed;
     }
 
-    public function setStartRed(\DateTimeInterface $startRed): self
+    public function setStartRed(\DateTimeImmutable $startRed): self
     {
         $this->startRed = $startRed;
 
         return $this;
     }
 
-    public function getEndRed(): ?\DateTimeInterface
+    public function getEndRed(): ?\DateTimeImmutable
     {
         return $this->endRed;
     }
 
-    public function setEndRed(?\DateTimeInterface $endRed): self
+    public function setEndRed(?\DateTimeImmutable $endRed): self
     {
         $this->endRed = $endRed;
 
@@ -500,4 +501,6 @@ class Gite
     {
         $this->updatedAt = new \DateTime();
     }
+
+   
 }
