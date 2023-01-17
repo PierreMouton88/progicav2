@@ -78,14 +78,37 @@
 	<div class="col">
 		{{ form_row(form.endRed, {'label': 'Fin saison haute'}) }}
 	</div>
+</div >	 	
+
+
+<div>
+
+    
+
+         <h3> Services </h3>
+	
+        {% for key, giteServicesForm in form.giteServices %}
+            <button
+                data-action="live#action"
+                data-action-name="removegiteServices(index={{ key }})"
+                type="button"
+            >Remove</button>
+
+            {{ form_widget(giteServicesForm) }}
+        {% endfor %}
+        
+
+        {# avoid an extra label for this field #}
+         {% do form.giteServices.setRendered %}
+
+        <button
+            data-action="live#action"
+            data-action-name="addgiteServices"
+            type="button"
+        >+ Add Gite Service</button>
 </div>
-
 <div class="row">
-	<div class="col">
 
-		{{ form_row(form.giteServices[0]['service'], {'label': 'Service(s) proposé(s)'}) }}
-		{{form_row(form.giteServices[0]['price'], {'label': 'Prix du service'})}}
-	</div>
 
 	<div class="col">
 		{{ form_row(form.giteEqpExts[0]['eqpExt'], {'label': 'Equipements extérieurs inclus'}) }}

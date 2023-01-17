@@ -3,6 +3,8 @@
 namespace App\Form;
 
 use App\Entity\GiteService;
+use App\Entity\Service;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -13,8 +15,16 @@ class GiteServiceType extends AbstractType
     {
         $builder
             
-            ->add('service')
-            ->add('price')
+            ->add('service', 
+            EntityType::class, [
+                'label' => false,
+                'class' => Service::class
+            ])
+            ->add('price', null,
+                [
+                'label' => 'Prix du service',
+                
+            ])
 
         ;
     }

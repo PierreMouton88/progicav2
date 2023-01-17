@@ -66,14 +66,20 @@
 						<th>RedPrice</th>
 						<td>{{ gite.redPrice }}</td>
 					</tr>
-					<tr>
+					{# <tr>
 						<th>StartRed</th>
-						<td>{{ gite.startRed ? gite.startRed|date('Y-m-d') : '' }}</td>
+						{% if startRed %}
+							<td>{{ gite.startRed ? gite.startRed|date('Y-m-d') : '' }}</td>
+						{% endif %}
+						
 					</tr>
 					<tr>
 						<th>EndRed</th>
-						<td>{{ gite.endRed ? gite.endRed|date('Y-m-d') : '' }}</td>
-					</tr>
+						{% if endRed %}
+							<td>{{ gite.endRed ? gite.endRed|date('Y-m-d') : '' }}</td>
+						{% endif %}
+						
+					</tr> #}
 					<tr>
 						<th>CreatedAt</th>
 						<td>{{ gite.createdAt ? gite.createdAt|date('Y-m-d H:i:s') : '' }}</td>
@@ -90,7 +96,27 @@
 								{{ giteservice.service.name }}
 								à
 								{{ giteservice.price }}
-								boules
+								pesos<br>
+							{% endfor %}
+						</td>
+					</tr>
+					<tr>
+						<th>Equipements Extérieurs
+						</th>
+						<td>
+							{% for giteEqpExt in gite.giteEqpExts %}
+								{{ giteEqpExt.eqpExt.name }}	
+								<br>							
+							{% endfor %}
+						</td>
+					</tr>
+					<tr>
+						<th>Equipements Intérieurs
+						</th>
+						<td>
+							{% for giteEqpInt in gite.giteEqpInts %}
+								{{ giteEqpInt.eqpInt.name }} 
+								<br> 							
 							{% endfor %}
 						</td>
 					</tr>
