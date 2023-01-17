@@ -1,0 +1,29 @@
+{# <div>
+{{form_start(form)}}
+
+         <h3> Services </h3>
+        {% for key, giteServicesForm in form.giteServices %}
+            <button
+                data-action="live#action"
+                data-action-name="removegiteServices(index={{ key }})"
+                type="button"
+            >X</button>
+
+            {{ form_widget(giteServicesForm) }}
+        {% endfor %}
+        
+
+        {# avoid an extra label for this field #}
+        {# {% do form.giteServices.setRendered %}
+
+        <button
+            data-action="live#action"
+            data-actio-name="addgiteServices"
+            type="button"
+        >+ Add Gite Service</button>
+
+        <button type="submit" >Sauvegarder</button>
+       
+        {{form_end(form)}}
+
+        </div> #} 
