@@ -5,8 +5,13 @@
 
 {% block body %}
 	<h1 class="mb-5 text-center">Ajouter votre Gite</h1>
-
+	{# {{ component('new_gite', {
+        gite: gite.id  ? gite : null,
+        form: form
+    }) }} #}
 	{{ include('gite/_form.html.twig') }}
 
 	<a class="btn btn-primary my-3" href="{{ path('app_gite_index') }}">back to list</a>
 {% endblock %}
+
+

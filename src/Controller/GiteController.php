@@ -27,6 +27,29 @@ class GiteController extends AbstractController
         ]);
     }
 
+    #[Route('/new-live', name: 'app_gite_new_live', methods: ['GET', 'POST'])]
+    public function new_live(Request $request, GiteRepository $giteRepository)
+    {
+        $gite = new Gite();
+        $giteService = new GiteService();
+        $gite->addGiteService($giteService);
+
+        $form = $this->createForm(GiteType::class, $gite);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $gite->setOwner($this->getUser());
+            $giteRepository->save($gite, true);
+
+            return $this->redirectToRoute('app_gite_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('gite/new_live.html.twig', [
+            'gite' => $gite,
+            'form' => $form,
+        ]);
+    }
+
     #[Route('/new', name: 'app_gite_new', methods: ['GET', 'POST'])]
     public function new(Request $request, GiteRepository $giteRepository): Response
     {

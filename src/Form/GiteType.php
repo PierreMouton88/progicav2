@@ -54,6 +54,8 @@ class GiteType extends AbstractType
             ->add('giteServices', CollectionType::class, [
                 'allow_add' => true,
                 'entry_type' => GiteServiceType::class,
+                'allow_delete'=> true,
+                'by_reference' => false,
 
             ])
             ->add('giteEqpExts', CollectionType::class, [
