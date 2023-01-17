@@ -81,8 +81,11 @@ main {
   section {
     margin: 0;
     padding: 0;
+    height: auto;
+
     img {
       height: 81.8vh;
+      width: 100vw;
       margin: 0;
       position: absolute;
       top: 76px;

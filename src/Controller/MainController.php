@@ -16,4 +16,11 @@ class MainController extends AbstractController
         ]);
     }
 
+    #[Route('/us', name: 'app_us')]
+    public function goToUs(): Response
+    {
+        return $this->render('main/sec_homepage.html.twig', [
+            'controller_name' => 'MainController',
+        ]);
+    }
 }

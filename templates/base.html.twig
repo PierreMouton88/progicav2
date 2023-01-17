@@ -23,17 +23,17 @@
 		<main class="">
 			{% for message in app.session.flashBag.get('info') %}
 				<div class="w-50 alert alert-info" role="alert">
-					<h3>{{ message }}</h3>
+					{{ message }}
 				</div>
 			{% endfor %}
 			{% for message in app.session.flashBag.get('error') %}
 				<div class="w-50 alert alert-danger" role="alert">
-					<h3>{{ message }}</h3>
+					{{ message }}
 				</div>
 			{% endfor %}
 			{% for message in app.session.flashBag.get('success') %}
 				<div class="mx-auto w-50 alert alert-success" role="alert">
-					<h3>{{ message }}</h3>
+					{{ message }}
 				</div>
 			{% endfor %}
 			{% block body %}{% endblock %}
