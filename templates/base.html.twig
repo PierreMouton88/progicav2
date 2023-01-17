@@ -7,22 +7,21 @@
 			{% block title %}Welcome!
 			{% endblock %}
 		</title>
-		<link class="rounded-pill" rel="icon" href="../images/our_images/icon2.png">
+		<link class="rounded-pill" rel="icon" href="../images/our_images/icone.png">
 		{# <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>"> #}
 		{# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
-	
-		{% block stylesheets %}
-			{{ encore_entry_link_tags('app') }}	 
+
+			{% block stylesheets %}
+		{{ encore_entry_link_tags('app') }}
 		{% endblock %}
 
-		{% block javascripts %}
-			{{ encore_entry_script_tags('app') }}
-		{% endblock %}
+			{% block javascripts %}
+		{{ encore_entry_script_tags('app') }}
+	{% endblock %}
 	</head>
-	<body>
+		<body>
 		{% include "_partials/_header.html.twig" %}
-		<main class="container">
-			{% for message in app.session.flashBag.get('info') %}
+			<main class=""> {% for message in app.session.flashBag.get('info') %}
 				<div class="w-50 alert alert-info" role="alert">
 					{{ message }}
 				</div>

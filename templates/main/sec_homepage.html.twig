@@ -4,20 +4,26 @@
 {% endblock %}
 
 {% block body %}
-	<section class="container">
+	<section id="secHomepage" class="container">
 		<div class="row">
 			<div class="col-8">
-				<h1 class="">Bienvenue dans notre site de reservation de gîte en France</h1>
-				<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque reprehenderit fugiat aut nobis dolorum neque. Distinctio impedit eos animi adipisci eligendi fugiat nihil explicabo iste, illo, error ad? Reprehenderit, saepe?</p>
-				<button class="btn">
-					<a class="nav-item" href="{{path ('app_gite_index') }}">NOS GÎTES</a>
-				</button>
+				<div class="pe-5">
+					<h1 class="">Bienvenue dans notre site de reservation de gîte en France</h1>
+					<p class="">Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque reprehenderit fugiat aut nobis dolorum neque. Distinctio impedit eos animi adipisci eligendi fugiat nihil explicabo iste, illo, error ad? Reprehenderit, saepe?
+						<br>
+						Lorem, ipsum dolor sit amet consectetur adipisicing elit. Architecto, ipsam quos, deleniti est nulla natus blanditiis error cupiditate quia nam perspiciatis vero suscipit totam tenetur assumenda similique earum molestiae placeat!
+					</p>
+				</div>
+				<div class="text-end mt-5">
+					<button class="btn btn-style text-center">
+						<a class="nav-item" href="{{path ('app_gite_index') }}">NOS GÎTES</a>
+					</button>
+				</div>
 			</div>
-			<div class="col-4">
-				<img src={{ asset('/images/our_images/frontPage.jpg') }} alt="">
+			<div class="col-4 p-5">
+				<img src={{ asset('/images/our_images/secHomepageImage.jpg') }} alt="">
 			</div>
 		</div>
-
 	</section>
 
 {% endblock %}

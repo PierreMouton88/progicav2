@@ -12,6 +12,17 @@ $text-color: #eee;
   color: $main-color;
 }
 
+.btn-style {
+  border: 3px solid $text-color;
+  border-radius: 0;
+  width: 15%;
+  background-color: $main-color;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  -ms-border-radius: 0;
+  -o-border-radius: 0;
+}
+
 .arapey {
   font-family: "Arapey", serif;
 }
@@ -93,10 +104,30 @@ main {
   }
 }
 
+#secHomepage {
+  img {
+    width: 100%;
+  }
+  h1 {
+    text-align: start;
+    font-family: "Arapey", serif;
+    font-size: 5rem;
+    line-height: 5rem;
+    color: #333;
+  }
+  button {
+    width: 30%;
+    a {
+      text-decoration: none;
+      color: $text-color;
+    }
+  }
+}
+
 .card {
   .btn {
     width: 30%;
-    margin: auto;       
+    margin: auto;
   }
 }
 
