@@ -72,31 +72,12 @@
 			{{ form_row(form.redPrice, {'label': 'Prix hebdomadaire haute saison'}) }}
 		</div>
 	</div>
-
-	{# <div class="row">
-			<div class="col">
-				{{ form_row(form.startRed, {'label': 'Début saison haute'}) }}
-			</div>
-			<div class="col">
-				{{ form_row(form.endRed, {'label': 'Fin saison haute'}) }}
-			</div>
-		</div >	 	
-		 #}
-
-	{# <div class="row">
-		
-		
-			<div class="col">
-				{{ form_row(form.giteEqpExts[0]['eqpExt'], {'label': 'Equipements extérieurs inclus'}) }}
-			</div>
-			<div class="col">
-				{{ form_row(form.giteEqpInts[0]['eqpInt'], {'label': 'Equipements intérieur inclus'}) }}
-			</div>
-		</div> #}
-
 	<div class="row">
 		<div class="col">
-			{{ form_row(form.imageFile, {'label': 'Photo de votre bien'}) }}
+			{{ form_row(form.startRed, {'label': 'Début saison haute'}) }}
+		</div>
+		<div class="col">
+			{{ form_row(form.endRed, {'label': 'Fin saison haute'}) }}
 		</div>
 	</div>
 	<div class="row">
@@ -160,6 +141,13 @@
 					Ajouter un équipement extérieur</button>
 			</div>
 		</div>
+
+		<div class="row">
+			<div class="col">
+				{{ form_row(form.imageFile, {'label': 'Photo de votre bien'}) }}
+			</div>
+		</div>
+
 		<button class="btn btn-light">{{ button_label|default('Sauvegarder') }}</button>
 		{{ form_end(form) }}
 	</div>
