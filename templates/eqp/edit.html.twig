@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Eqp{% endblock %}
+
+{% block body %}
+    <h1>Edit Eqp</h1>
+
+    {{ include('eqp/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_eqp_index') }}">back to list</a>
+
+    {{ include('eqp/_delete_form.html.twig') }}
+{% endblock %}

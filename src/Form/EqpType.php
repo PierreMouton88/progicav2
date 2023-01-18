@@ -2,31 +2,30 @@
 
 namespace App\Form;
 
-use App\Entity\EqpInt;
-use App\Entity\GiteEqpInt;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use App\Entity\Eqp;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class GiteEqpIntType extends AbstractType
+class EqpType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            
-            ->add('eqpInt', 
-            EntityType::class, [
-                'label' => false,
-                'class' => EqpInt::class
-            ])
-        ;
+            ->add('name')
+            ->add('type', ChoiceType::class, [
+                'choices' => [
+                    'intérieur' => Eqp::INT,
+                    'extérieur' => Eqp::EXT
+                ]
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => GiteEqpInt::class,
+            'data_class' => Eqp::class,
         ]);
     }
 }

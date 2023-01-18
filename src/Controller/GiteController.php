@@ -9,6 +9,7 @@ use App\Entity\GiteService;
 use App\Entity\User;
 use App\Form\GiteType;
 use App\Repository\GiteRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -34,15 +35,20 @@ class GiteController extends AbstractController
 
         $giteservice = new GiteService();
         $gite->addGiteService($giteservice);
-        $giteexpext = new GiteEqpExt();
-        $gite->addGiteEqpExt($giteexpext);
-        $giteexpint = new GiteEqpInt();
-        $gite->addGiteEqpInt($giteexpint);
 
         $form = $this->createForm(GiteType::class, $gite);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $eqpExt = $form->get('eqpExt')->getData();
+            $eqpInt = $form->get('eqpInt')->getData();
+            $eqps = array_merge(
+                $eqpInt->toArray(),
+                $eqpExt->toArray()
+            );
+            foreach ($eqps as $eqp) {
+                $gite->addEqp($eqp);
+            }
             $gite->setUser(($this->getUser()));
             $giteRepository->save($gite, true);
             $this->addFlash('success', "Votre bien a bien été ajouté");

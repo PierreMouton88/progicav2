@@ -1,14 +1,14 @@
 <div{{attributes}}>
 
 	{{ form_start(form) }}
+	<section class="container">
+		<div class="my-custom-class-for-errors">
+			{{ form_errors(form) }}
+		</div>
 
-	<div class="my-custom-class-for-errors">
-		{{ form_errors(form) }}
-	</div>
-
-	<div class="row">
-		<div class="col">
-			{{ form_row(form.name, {'label': 'Renseignez votre titre d\'annonce'}) }}
+		<div class="row">
+			<div class="col">
+				{{ form_row(form.name, {'label': 'Renseignez votre titre d\'annonce'}) }}
 		<small class="mb-3">N'oubliez pas de renseigner un titre attractif</small>
 	</div>
 </div>
@@ -16,154 +16,172 @@
 <div class="row">
 	<div class="col">		
 		{{ form_row(form.description, {'label': 'Description'}) }}
-		</div>
-	</div>
-
-	<div class="row">
-		<div class="col">
-			{{ form_row(form.address, {'label': 'Adresse'}) }}
-		</div>
-	</div>
-
-	<div class="row">
-		<div class="col-4">
-			{{ form_row(form.zipcode, {'label': 'Code Postal'}) }}
-		</div>
-		<div class="col-8">
-			{{ form_row(form.city, {'label': 'Ville'}) }}
-		</div>
-	</div>
-
-	<div class="row">
-		<div class="col">
-			{{ form_row(form.departement, {'label': 'Departement'}) }}
-		</div>
-		<div class="col">
-			{{ form_row(form.region, {'label': 'Région'}) }}
-		</div>
-	</div>
-
-	<div class="row">
-		<div class="col">
-			{{ form_row(form.surface, {'label': 'Surface Totale'}) }}
-		</div>
-		<div class="col">
-			{{ form_row(form.rooms, {'label': 'Nombre de chambres'}) }}
-		</div>
-		<div class="col">
-			{{ form_row(form.beds, {'label': 'Nombre de lits'}) }}
-		</div>
-	</div>
-
-	<div class="row">
-		<div class="col">
-			{{ form_row(form.animalAllowed, {'label': 'Autorisez-vous les animaux ?'}) }}
-		</div>
-		<div class="col">
-			{{ form_row(form.animalFee, {'label': 'Si oui, veuillez renseigner le supplément.'}) }}
-		</div>
-	</div>
-
-	<div class="row">
-		<div class="col">
-			{{ form_row(form.greenPrice, {'label': 'Prix hebdomadaire'}) }}
-		</div>
-		<div class="col">
-			{{ form_row(form.redPrice, {'label': 'Prix hebdomadaire haute saison'}) }}
-		</div>
-	</div>
-
-	{# <div class="row">
-					<div class="col">
-						{{ form_row(form.startRed, {'label': 'Début saison haute'}) }}
-					</div>
-					<div class="col">
-						{{ form_row(form.endRed, {'label': 'Fin saison haute'}) }}
-					</div>
-				</div >	 	
-				 #}
-
-	{# <div class="row">
-				
-				
-					<div class="col">
-						{{ form_row(form.giteEqpExts[0]['eqpExt'], {'label': 'Equipements extérieurs inclus'}) }}
-					</div>
-					<div class="col">
-						{{ form_row(form.giteEqpInts[0]['eqpInt'], {'label': 'Equipements intérieur inclus'}) }}
-					</div>
-				</div> #}
-
-	<div class="row">
-		<div class="col">
-			{{ form_row(form.startRed, {'label': 'Début saison haute'}) }}
-		</div>
-		<div class="col">
-			{{ form_row(form.endRed, {'label': 'Fin saison haute'}) }}
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-sm-4">
-			<div class="card p-3">
-				<h3>
-					Services
-				</h3>
-				{% for key, giteServicesForm in form.giteServices %}
-					<button data-action="live#action" data-action-name="removegiteServices(index={{ key }})" type="button">X</button>
-
-					{{ form_widget(giteServicesForm) }}
-				{% endfor %}
-
-
-				{# avoid an extra label for this field #}
-				{% do form.giteServices.setRendered %}
-
-				<button data-action="live#action" data-action-name="addGiteServices" type="button">
-					Ajouter un service</button>
-			</div>
-		</div>
-		<div class="col-sm-4">
-			<div class="card p-3">
-				<h3>
-					Equipements intérieurs
-				</h3>
-				{% for key, giteEqpIntsForm in form.giteEqpInts %}
-					<button data-action="live#action" data-action-name="removeGiteInts(index={{ key }})" type="button">X</button>
-
-					{{ form_widget(giteEqpIntsForm) }}
-				{% endfor %}
-
-
-				{# avoid an extra label for this field #}
-				{% do form.giteEqpInts.setRendered %}
-
-				<button data-action="live#action" data-action-name="addGiteEqpInts" type="button">
-					Ajouter un équipement intérieur
-				</button>
-			</div>
-		</div>
-		<div class="col-sm-4">
-			<div class="card p-3">
-				<h3 class="card-title">
-					Equipements extérieurs
-				</h3>
-				{% for key, giteEqpExtsForm in form.giteEqpExts %}
-					<button class=" btn btn-dark btn-sm" data-action="live#action" data-action-name="removeGiteEqpExts(index={{ key }})" type="button">
-						<i class="fa-solid fa-trash lime"></i>
-					</button>
-
-					{{ form_widget(giteEqpExtsForm) }}
-				{% endfor %}
-
-
-				{# avoid an extra label for this field #}
-				{% do form.giteEqpExts.setRendered %}
-
-				<button data-action="live#action" data-action-name="addGiteEqpExts" type="button">
-					Ajouter un équipement extérieur</button>
 			</div>
 		</div>
 
+		<div class="row">
+			<div class="col">
+				{{ form_row(form.address, {'label': 'Adresse'}) }}
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-4">
+				{{ form_row(form.zipcode, {'label': 'Code Postal'}) }}
+			</div>
+			<div class="col-8">
+				{{ form_row(form.city, {'label': 'Ville'}) }}
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col">
+				{{ form_row(form.departement, {'label': 'Departement'}) }}
+			</div>
+			<div class="col">
+				{{ form_row(form.region, {'label': 'Région'}) }}
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col">
+				{{ form_row(form.surface, {'label': 'Surface Totale'}) }}
+			</div>
+			<div class="col">
+				{{ form_row(form.rooms, {'label': 'Nombre de chambres'}) }}
+			</div>
+			<div class="col">
+				{{ form_row(form.beds, {'label': 'Nombre de lits'}) }}
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col">
+				{{ form_row(form.animalAllowed, {'label': 'Autorisez-vous les animaux ?'}) }}
+			</div>
+			<div class="col">
+				{{ form_row(form.animalFee, {'label': 'Si oui, veuillez renseigner le supplément.'}) }}
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col">
+				{{ form_row(form.greenPrice, {'label': 'Prix hebdomadaire'}) }}
+			</div>
+			<div class="col">
+				{{ form_row(form.redPrice, {'label': 'Prix hebdomadaire haute saison'}) }}
+			</div>
+		</div>
+
+		{# <div class="row">
+																											<div class="col">
+																												{{ form_row(form.startRed, {'label': 'Début saison haute'}) }}
+																											</div>
+																											<div class="col">
+																												{{ form_row(form.endRed, {'label': 'Fin saison haute'}) }}
+																											</div>
+																										</div >	 	
+																										 #}
+
+		{# <div class="row">
+																										
+																										
+																											<div class="col">
+																												{{ form_row(form.giteEqpExts[0]['eqpExt'], {'label': 'Equipements extérieurs inclus'}) }}
+																											</div>
+																											<div class="col">
+																												{{ form_row(form.giteEqpInts[0]['eqpInt'], {'label': 'Equipements intérieur inclus'}) }}
+																											</div>
+																										</div> #}
+
+		<div class="row">
+			<div class="col">
+				{{ form_row(form.startRed, {'label': 'Début saison haute'}) }}
+			</div>
+			<div class="col">
+				{{ form_row(form.endRed, {'label': 'Fin saison haute'}) }}
+			</div>
+		</div>
+		<div class="row">
+			<div class="col card">
+				<div class="card-body p-3">
+					<h3 class="card-title">
+						Services
+					</h3>
+
+					{% for key, giteServicesForm in form.giteServices %}
+						<div class="d-flex">
+							<button class="btn" data-action="live#action" data-action-name="removegiteServices(index={{ key }})" type="button">
+								<i class="fa-solid fa-trash lime"></i>
+							</button>
+
+							{{ form_widget(giteServicesForm) }}
+						</div>
+					{% endfor %}
+
+
+					{# avoid an extra label for this field #}
+					{% do form.giteServices.setRendered %}
+
+					<button class="btn btn-outline-info" data-action="live#action" data-action-name="addGiteServices" type="button">
+						Ajouter un service</button>
+				</div>
+			</div>
+
+
+			{# <div class="col card ">
+																			<div class="card-body p-3">
+																				<h3 class="card-title">
+																					Equipements intérieurs
+																				</h3>
+																				{% for key, giteEqpIntsForm in form.giteEqpInts %}
+																					<div class="d-flex">
+																						<button data-action="live#action" data-action-name="removeGiteInts(index={{ key }})" type="button">
+																							<i class="fa-solid fa-trash lime"></i>
+																						</button>
+															
+																						{{ form_widget(giteEqpIntsForm) }}
+																					</div>
+																				{% endfor %} #}
+
+
+			{# {% do form.giteEqpInts.setRendered %}
+															
+																				<button data-action="live#action" data-action-name="addGiteEqpInts" type="button">
+																					Ajouter un équipement intérieur
+																				</button>
+																			</div>
+																		</div> #}
+			{# <div class="col card">
+																			<div class="card-body p-3">
+																				<h3 class="card-title">
+																					Equipements extérieurs
+																				</h3>
+																				{% for key, giteEqpExtsForm in form.giteEqpExts %}
+																					<div class="d-flex">
+																						<button class=" btn btn-dark btn-sm" data-action="live#action" data-action-name="removeGiteEqpExts(index={{ key }})" type="button">
+																							<i class="fa-solid fa-trash lime"></i>
+																						</button>
+															
+																						{{ form_widget(giteEqpExtsForm) }}
+																					</div>
+																				{% endfor %}
+															
+															
+																				{% do form.giteEqpExts.setRendered %}
+															
+																				<button data-action="live#action" data-action-name="addGiteEqpExts" type="button">
+																					Ajouter un équipement extérieur</button>
+																			</div>
+																		</div> #}
+
+				<div class="col"> {{ form_row(form.eqpExt, {'label': 'Equipements extérieurs'}) }}
+			</div>
+			<div class="col">
+				{{ form_row(form.eqpInt, {'label': 'Equipements intérieurs'}) }}
+			</div>
+
+		</div>
 		<div class="row">
 			<div class="col">
 				{{ form_row(form.imageFile, {'label': 'Photo de votre bien'}) }}
@@ -171,6 +189,5 @@
 		</div>
 
 		<button class="btn btn-light">{{ button_label|default('Sauvegarder') }}</button>
-		{{ form_end(form) }}
-	</div>
-</div>
+		{{ form_end(form) }}</div>
+</div></section>

@@ -10,6 +10,9 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: EqpRepository::class)]
 class Eqp
 {
+    const INT = 'intérieur';
+    const EXT = 'extérieur';
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
