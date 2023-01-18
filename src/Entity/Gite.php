@@ -97,12 +97,6 @@ class Gite
     #[ORM\JoinColumn(nullable: true)]
     private ?User $contact = null;
 
-    #[ORM\OneToMany(mappedBy: 'gite', targetEntity: GiteEqpExt::class, cascade: ['persist'])]
-    private Collection $giteEqpExts;
-
-    #[ORM\OneToMany(mappedBy: 'gite', targetEntity: GiteEqpInt::class, cascade: ['persist'])]
-    private Collection $giteEqpInts;
-
     #[ORM\ManyToMany(targetEntity: Eqp::class, mappedBy: 'gite')]
     private Collection $eqps;
 
@@ -112,8 +106,6 @@ class Gite
     public function __construct()
     {
         $this->giteServices = new ArrayCollection();
-        $this->giteEqpExts = new ArrayCollection();
-        $this->giteEqpInts = new ArrayCollection();
         $this->eqps = new ArrayCollection();
     }
 
@@ -394,66 +386,6 @@ class Gite
         return $this;
     }
 
-    /**
-     * @return Collection<int, GiteEqpExt>
-     */
-    public function getGiteEqpExts(): Collection
-    {
-        return $this->giteEqpExts;
-    }
-
-    public function addGiteEqpExt(GiteEqpExt $giteEqpExt): self
-    {
-        if (!$this->giteEqpExts->contains($giteEqpExt)) {
-            $this->giteEqpExts->add($giteEqpExt);
-            $giteEqpExt->setGite($this);
-        }
-
-        return $this;
-    }
-
-    public function removeGiteEqpExt(GiteEqpExt $giteEqpExt): self
-    {
-        if ($this->giteEqpExts->removeElement($giteEqpExt)) {
-            // set the owning side to null (unless already changed)
-            if ($giteEqpExt->getGite() === $this) {
-                $giteEqpExt->setGite(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, GiteEqpInt>
-     */
-    public function getGiteEqpInts(): Collection
-    {
-        return $this->giteEqpInts;
-    }
-
-    public function addGiteEqpInt(GiteEqpInt $giteEqpInt): self
-    {
-        if (!$this->giteEqpInts->contains($giteEqpInt)) {
-            $this->giteEqpInts->add($giteEqpInt);
-            $giteEqpInt->setGite($this);
-        }
-
-        return $this;
-    }
-
-    public function removeGiteEqpInt(GiteEqpInt $giteEqpInt): self
-    {
-        if ($this->giteEqpInts->removeElement($giteEqpInt)) {
-            // set the owning side to null (unless already changed)
-            if ($giteEqpInt->getGite() === $this) {
-                $giteEqpInt->setGite(null);
-            }
-        }
-
-        return $this;
-    }
-
     public function setImageFile(?File $imageFile = null): void
     {
         $this->imageFile = $imageFile;
@@ -535,8 +467,4 @@ class Gite
 
         return $this;
     }
-
-   
-
-   
 }
