@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Eqp{% endblock %}
+
+{% block body %}
+    <h1>Create new Eqp</h1>
+
+    {{ include('eqp/_form.html.twig') }}
+
+    <a href="{{ path('app_eqp_index') }}">back to list</a>
+{% endblock %}

@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Gite;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -30,33 +31,39 @@ class GiteType extends AbstractType
             ->add('animalFee')
             ->add('greenPrice')
             ->add('redPrice')
-            ->add('startRed', DateType::class,[
-                'by_reference' => true,])
+            ->add('startRed', DateType::class, [
+                'by_reference' => true,
+            ])
             ->add('endRed',  DateType::class)
             ->add('giteServices', CollectionType::class, [
                 'allow_add' => true,
                 'entry_type' => GiteServiceType::class,
-                'allow_delete'=> true,
+                'allow_delete' => true,
                 'by_reference' => false,
 
             ])
-            ->add('giteEqpExts', CollectionType::class, [
-                'allow_add' => true,
-                'entry_type' => GiteEqpExtType::class,
-                'allow_delete'=> true,
-                'by_reference' => false,
-                
+            // ->add('giteEqpExts', CollectionType::class, [
+            //     'allow_add' => true,
+            //     'entry_type' => GiteEqpExtType::class,
+            //     'allow_delete'=> true,
+            //     'by_reference' => false,
 
-            ])
-            ->add('giteEqpInts', CollectionType::class, [
-                'allow_add' => true,
-                'entry_type' => GiteEqpIntType::class,
-                'allow_delete'=> true,
-                'by_reference' => false,
 
+            // ])
+            // ->add('giteEqpInts', CollectionType::class, [
+            //     'allow_add' => true,
+            //     'entry_type' => GiteEqpIntType::class,
+            //     'allow_delete'=> true,
+            //     'by_reference' => false,
+
+            // ])
+            ->add('eqpInt', EqpAutocompleteFieldInt::class, [
+                'mapped' => false
             ])
-            ->add('imageFile', VichFileType::class)
-            ;
+            ->add('eqpExt', EqpAutocompleteFieldExt::class, [
+                'mapped' => false
+            ])
+            ->add('imageFile', VichFileType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
