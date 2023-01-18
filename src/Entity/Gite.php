@@ -103,6 +103,9 @@ class Gite
     #[ORM\OneToMany(mappedBy: 'gite', targetEntity: GiteEqpInt::class, cascade: ['persist'])]
     private Collection $giteEqpInts;
 
+    #[ORM\ManyToMany(targetEntity: Eqp::class, mappedBy: 'gite')]
+    private Collection $eqps;
+
 
 
 
@@ -111,6 +114,7 @@ class Gite
         $this->giteServices = new ArrayCollection();
         $this->giteEqpExts = new ArrayCollection();
         $this->giteEqpInts = new ArrayCollection();
+        $this->eqps = new ArrayCollection();
     }
 
 
@@ -503,6 +507,33 @@ class Gite
     public function setUpdatedAtValue(): void
     {
         $this->updatedAt = new \DateTime();
+    }
+
+    /**
+     * @return Collection<int, Eqp>
+     */
+    public function getEqps(): Collection
+    {
+        return $this->eqps;
+    }
+
+    public function addEqp(Eqp $eqp): self
+    {
+        if (!$this->eqps->contains($eqp)) {
+            $this->eqps->add($eqp);
+            $eqp->addGite($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEqp(Eqp $eqp): self
+    {
+        if ($this->eqps->removeElement($eqp)) {
+            $eqp->removeGite($this);
+        }
+
+        return $this;
     }
 
    
