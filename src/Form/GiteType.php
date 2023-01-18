@@ -30,8 +30,8 @@ class GiteType extends AbstractType
             ->add('animalFee')
             ->add('greenPrice')
             ->add('redPrice')
-            // ->add('startRed', DateType::class)
-            // ->add('endRed',  DateType::class)
+            ->add('startRed', DateType::class)
+            ->add('endRed',  DateType::class)
             ->add('giteServices', CollectionType::class, [
                 'allow_add' => true,
                 'entry_type' => GiteServiceType::class,
@@ -54,7 +54,8 @@ class GiteType extends AbstractType
                 'by_reference' => false,
 
             ])
-            ->add('imageFile', VichFileType::class);
+            ->add('imageFile', VichFileType::class)
+            ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
