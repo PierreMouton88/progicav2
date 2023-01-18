@@ -30,7 +30,8 @@ class GiteType extends AbstractType
             ->add('animalFee')
             ->add('greenPrice')
             ->add('redPrice')
-            ->add('startRed', DateType::class)
+            ->add('startRed', DateType::class,[
+                'by_reference' => true,])
             ->add('endRed',  DateType::class)
             ->add('giteServices', CollectionType::class, [
                 'allow_add' => true,

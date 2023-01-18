@@ -74,29 +74,32 @@
 	</div>
 
 	{# <div class="row">
-				<div class="col">
-					{{ form_row(form.startRed, {'label': 'Début saison haute'}) }}
-				</div>
-				<div class="col">
-					{{ form_row(form.endRed, {'label': 'Fin saison haute'}) }}
-				</div>
-			</div >	 	
-			 #}
+					<div class="col">
+						{{ form_row(form.startRed, {'label': 'Début saison haute'}) }}
+					</div>
+					<div class="col">
+						{{ form_row(form.endRed, {'label': 'Fin saison haute'}) }}
+					</div>
+				</div >	 	
+				 #}
 
 	{# <div class="row">
-			
-			
-				<div class="col">
-					{{ form_row(form.giteEqpExts[0]['eqpExt'], {'label': 'Equipements extérieurs inclus'}) }}
-				</div>
-				<div class="col">
-					{{ form_row(form.giteEqpInts[0]['eqpInt'], {'label': 'Equipements intérieur inclus'}) }}
-				</div>
-			</div> #}
+				
+				
+					<div class="col">
+						{{ form_row(form.giteEqpExts[0]['eqpExt'], {'label': 'Equipements extérieurs inclus'}) }}
+					</div>
+					<div class="col">
+						{{ form_row(form.giteEqpInts[0]['eqpInt'], {'label': 'Equipements intérieur inclus'}) }}
+					</div>
+				</div> #}
 
 	<div class="row">
 		<div class="col">
-			{{ form_row(form.imageFile, {'label': 'Photo de votre bien'}) }}
+			{{ form_row(form.startRed, {'label': 'Début saison haute'}) }}
+		</div>
+		<div class="col">
+			{{ form_row(form.endRed, {'label': 'Fin saison haute'}) }}
 		</div>
 	</div>
 	<div class="row">
@@ -154,12 +157,19 @@
 
 
 				{# avoid an extra label for this field #}
-				{% do form.giteEqpExts[0]['eqpExt'].setRendered %}
+				{% do form.giteEqpExts.setRendered %}
 
 				<button data-action="live#action" data-action-name="addGiteEqpExts" type="button">
 					Ajouter un équipement extérieur</button>
 			</div>
 		</div>
+
+		<div class="row">
+			<div class="col">
+				{{ form_row(form.imageFile, {'label': 'Photo de votre bien'}) }}
+			</div>
+		</div>
+
 		<button class="btn btn-light">{{ button_label|default('Sauvegarder') }}</button>
 		{{ form_end(form) }}
 	</div>
