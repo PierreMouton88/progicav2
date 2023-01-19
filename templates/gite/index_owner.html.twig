@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gite index
+{% endblock %}
+
+{% block body %}
+	<h1>Liste de vos gîtes</h1>
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Titre</th>
+				<th>Description</th>
+				<th>Adresse</th>
+				<th>Ville</th>
+				<th>Zipcode</th>
+				<th>Departement</th>
+				<th>Region</th>
+				<th>Surface</th>
+				<th>Rooms</th>
+				<th>Beds</th>
+				<th>AnimalAllowed</th>
+				<th>AnimalFee</th>
+				<th>GreenPrice</th>
+				<th>RedPrice</th>
+				<th>StartRed</th>
+				<th>EndRed</th>
+				<th>CreatedAt</th>
+				<th>UpdatedAt</th>
+				<th>actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for gite in gites  %}
+
+				<tr>
+					<td>{{ gite.name }}</td>
+					<td>{{ gite.description|trans(locale='fr') }}</td>
+					<td>{{ gite.address }}</td>
+					<td>{{ gite.city }}</td>
+					<td>{{ gite.zipcode }}</td>
+					<td>{{ gite.departement }}</td>
+					<td>{{ gite.region }}</td>
+					<td>{{ gite.surface }}</td>
+					<td>{{ gite.rooms }}</td>
+					<td>{{ gite.beds }}</td>
+					<td>{{ gite.animalAllowed ? 'Oui' : 'Non' }}</td>
+					<td>{{ gite.animalFee }}</td>
+					<td>{{ gite.greenPrice }}</td>
+					<td>{{ gite.redPrice }}</td>
+					<td>{{ gite.startRed ? gite.startRed|format_datetime(locale='fr',pattern="dd MMMM YYYY") : '' }}</td>
+					<td>{{ gite.endRed ? gite.endRed|format_datetime(locale='fr',pattern="dd MMMM YYYY") : '' }}</td>
+					<td>{{ gite.createdAt ? gite.createdAt|format_datetime(locale='fr',pattern="dd MMMM YYYY HH:mm") : '' }}</td>
+					<td>{{ gite.updatedAt ? gite.updatedAt|format_datetime(locale='fr',pattern="dd MMMM YYYY HH:mm") : '' }}</td>
+					<td>
+						<a class="btn btn-outline-info" href="{{ path('app_gite_show', {'id': gite.id}) }}">
+							<i class="fa-solid fa-circle-info"></i>
+						</a>
+						<a class="btn btn-outline-warning" href="{{ path('app_gite_edit', {'id': gite.id}) }}">{# modifier #}<i class="fa-solid fa-pen-to-square"></i>
+						</a>
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="20">no records found</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+	<a class="btn btn-outline-dark" href="{{ path('app_gite_new') }}">Nouvel entrée</a>
+{% endblock %}

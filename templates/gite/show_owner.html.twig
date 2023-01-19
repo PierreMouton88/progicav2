@@ -5,19 +5,22 @@
 
 {% block body %}
 	<section class="container">
+
+		<h3 class="text-center p-3">Espace propriétaire</h3>
 		<h1 class="text-center">{{ gite.name }}</h1>
 
 
 		<div class="row">
 			<div class="col">
-				<img width="100%" src="../images/gites/{{ gite.imageName }}" alt="{{ gite.imageName }}">
-				<h3 class="mt-5">Description</h3>
-				<p>{{ gite.description }}</p>
+				<img width="100%" src="../../images/gites/{{ gite.imageName }}" alt="{{ gite.name }}">
 			</div>
 			<div class="col">
 				<table class="table">
 					<tbody>
-						<tr></tr>
+						<tr>
+							<th>Description</th>
+							<td>{{ gite.description }}</td>
+						</tr>
 						<tr>
 							<th>Adresse</th>
 							<td>{{ gite.address }}</td>
@@ -51,33 +54,53 @@
 							<td>{{ gite.beds }}</td>
 						</tr>
 						<tr>
-							<th>Animaux acceptés ?</th>
-							<td>{{ gite.animalAllowed ? 'Oui' : 'Non' }}</td>
-							{% if gite.animalAllowed and gite.animalFee > 0 %}
-								<td>Supplément:
-									{{ gite.animalFee }}
-									€</td>
-							{% endif %}
+							<th>AnimalAllowed</th>
+							<td>{{ gite.animalAllowed ? 'Yes' : 'No' }}</td>
 						</tr>
-
+						<tr>
+							<th>AnimalFee</th>
+							<td>{{ gite.animalFee }}</td>
+						</tr>
 						<tr>
 							<th>GreenPrice</th>
 							<td>{{ gite.greenPrice }}</td>
 						</tr>
+						<tr>
+							<th>RedPrice</th>
+							<td>{{ gite.redPrice }}</td>
+						</tr>
+						<tr>
+							<th>StartRed</th>
+							{% if gite.startRed %}
+								<td>{{ gite.startRed ? gite.startRed|date('Y-m-d') : '' }}</td>
+							{% endif %}
+						</tr>
 
+						<tr>
+							<th>EndRed</th>
+							{% if gite.endRed %}
+								<td>{{ gite.endRed ? gite.endRed|date('Y-m-d') : '' }}</td>
+							{% endif %}
+						</tr>
+
+						<tr>
+							<th>CreatedAt</th>
+							<td>{{ gite.createdAt ? gite.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+						</tr>
+
+						<tr>
+							<th>UpdatedAt</th>
+							<td>{{ gite.updatedAt ? gite.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+						</tr>
 						<tr>
 							<th>Services
 							</th>
 							<td>
 								{% for giteservice in gite.giteServices %}
 									{{ giteservice.service.name }}
-									{% if giteservice.price > 0  %}
-										à
-										{{ giteservice.price }}
-										pesos<br>
-									{% endif %}
-									<span>
-										(inclus)</span>
+									à
+									{{ giteservice.price }}
+									pesos<br>
 								{% endfor %}
 							</td>
 						</tr>
@@ -91,22 +114,11 @@
 								{% endfor %}
 							</td>
 						</tr>
-						<tr>
-							<th>Equipements ext
-							</th>
-							<td>
-								{% for giteEqp in gite.eqps %}
-									{% if giteEqp.type is same as("extérieur")  %}
-										{{ giteEqp.name }}
-										<br>
-									{% endif %}
-								{% endfor %}
-							</td>
-						</tr>
+
 					</tbody>
 				</table>
 
-				<a href="{{ path('app_gite_index') }}">back to list</a>
+				<a href="{{ path('app_gite_index_owner') }}"> Retour à la liste</a>
 
 				<a href="{{ path('app_gite_edit', {'id': gite.id}) }}">edit</a>
 

@@ -28,11 +28,12 @@ class GiteController extends AbstractController
         ]);
     }
 
-    #[Route('/public', name: 'app_gite_public_index', methods: ['GET'])]
+    #[Route('/owner', name: 'app_gite_index_owner', methods: ['GET'])]
     public function index_public(GiteRepository $giteRepository): Response
-    {
-        return $this->render('gite/index_public.html.twig', [
-            'gites' => $giteRepository->findAll(),
+    {   
+        $user = $this->getUser();
+        return $this->render('gite/index_owner.html.twig', [
+            'gites' => $giteRepository->findBy(['user' => $user])
         ]);
     }
 
@@ -81,11 +82,11 @@ class GiteController extends AbstractController
         }
     }
 
-    #[Route('/public/{id}', name: 'app_gite_public_show', methods: ['GET'])]
+    #[Route('/owner/{id}', name: 'app_gite_owner_show', methods: ['GET'])]
     public function show_public(Gite $gite): Response
     {
         if ($gite) {
-            return $this->render('gite/show_public.html.twig', [
+            return $this->render('gite/show_owner.html.twig', [
                 'gite' => $gite,
             ]);
         } else {
