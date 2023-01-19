@@ -4,32 +4,115 @@
 {% endblock %}
 
 {% block body %}
+	<div class="container-fluid bg-image" style="background-image: url('{{ asset('/images/our_images/Spanish_holiday_home.jpg') }} '); background-size: cover;
+			background-repeat: no-repeat; height:60vh">
+		<div class="row p-3 ">
 
-	<section class="container">
+			<div class="d-flex justify-content-center ">
+				<div class="col-2"></div>
+				<div class="col-8 p-3 my-5 bg-light  rounded">
+					<h3>Rechercher un gîte</h3>
+					<div class="p-1">
+						<span>Type de service recherché :
+						</span>
+						<select class=""></select>
+					</div>
+					<div class="p-1">
+						<span>Type d'équipement intérieur recherché :
+						</span>
+						<select class=""></select>
+					</div>
+					<div class="p-1">
+						<span>Type d'équipement extérieur recherché :
+						</span>
+						<select class="eqpext form-select" name="eqpext[]" multiple="multiple">
+						{% for eqpext in eqpexts  %}
+						<option value="{{ eqpext.name }}"></option>
+						{% endfor %}
+						</select>
+					</div>
+					<div class="text-center mt-2">
+						<a type="submit" href="{{path("app_gite_index")}}" class="btn btn-primary">Rechercher</a>
+					</div>
+				</div>
+				<div class="col-2"></div>
+			</div>
+
+		</div>
+
+
+	</div>
+
+
+	<section class="container-fluid ">
 		<h1 class="">Nos gîtes</h1>
 		<div class="row">
 
-			<h2>Les nouveautés</h2>
+			<h2 class="text-center m-3">Les nouveautés :</h2>
 
-			<ul id="index-pu-ul" class="d-flex">
+			<ul class="d-flex justify-content-center ">
+
 				{% for gite in gites[-5:5] %}
-					<li class="list-group-item col-2 mx-2">
+					<li id="index-pu-ul" class="list-group-item col-2 mx-2 rounded ">
 						<picture>
-							<img src="../images/gites/{{ gite.imageName }}" class="img-fluid rounded-top" alt="{{ gite.name }}">
+							<img src="../images/gites/{{ gite.imageName }}" class="img-fluid rounded-top " alt="{{ gite.name }}">
 						</picture>
 						<div>
-							<h3>{{ gite.name }}</h3>
+							<h4 class="text-center">{{ gite.name }}</h4>
 						</div>
-						<a class="btn btn-outline-info" href="{{ path('app_gite_show', {'id': gite.id}) }}">Voir</a>
+						<div>
+							<p class="text-center">{{ gite.city }}</p>
+						</div>
+						<div class="text-center p-2">
+							<a class="btn btn-outline-info" href="{{ path('app_gite_show', {'id': gite.id}) }}">Voir</a>
+						</div>
 					</li>
 				{% else %}
 					<li>
 						<div class="alert alert-info">no records found</div>
 					</li>
 				{% endfor %}
+
+			</ul>
+		</div>
+		<div class="text-center p-2">
+			<a class="btn btn-outline-info" href="#all">Tous nos gîtes</a>
+		</div>
+
+	</section>
+	<section id="all" class="container-fluid bg-secondary">
+		<div class="row">
+
+
+			<ul class="d-flex justify-content-center p-3 ">
+
+				{% for gite in gites %}
+					<li id="index-pu-ul" class="list-group-item col-2 mx-2 rounded">
+						<picture>
+							<img src="../images/gites/{{ gite.imageName }}" class="img-fluid rounded-top " alt="{{ gite.name }}">
+						</picture>
+						<div>
+							<h4 class="text-center">{{ gite.name }}</h4>
+						</div>
+						<div>
+							<p class="text-center">{{ gite.city }}</p>
+						</div>
+						<div class="text-center p-2">
+							<a class="btn btn-outline-info" href="{{ path('app_gite_show', {'id': gite.id}) }}">Voir</a>
+						</div>
+					</li>
+				{% else %}
+					<li>
+						<div class="alert alert-info">no records found</div>
+					</li>
+				{% endfor %}
+
 			</ul>
 		</div>
 	</section>
-
-
+	<script>
+		$(document).ready(function () {
+$('.eqpext').select2();
+});
+	</script>
 {% endblock %}

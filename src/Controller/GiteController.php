@@ -8,6 +8,7 @@ use App\Entity\GiteEqpInt;
 use App\Entity\GiteService;
 use App\Entity\User;
 use App\Form\GiteType;
+use App\Repository\EqpRepository;
 use App\Repository\GiteRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -21,10 +22,18 @@ use function PHPSTORM_META\type;
 class GiteController extends AbstractController
 {
     #[Route('/', name: 'app_gite_index', methods: ['GET'])]
-    public function index(GiteRepository $giteRepository): Response
-    {
+    public function index(GiteRepository $giteRepository, EqpRepository $eqpRepository): Response
+    {  
+        //  $find = $eqpRepository->findBy(['type'=>'extérieur']);
+        
+        
+        // foreach ($find as $i => $k){
+        //     $find[][$k] = $find[$i];
+        // }
+       
         return $this->render('gite/index.html.twig', [
             'gites' => $giteRepository->findAll(),
+            'eqpexts' => $eqpRepository->findBy(['type'=>'extérieur'])
         ]);
     }
 
@@ -32,6 +41,7 @@ class GiteController extends AbstractController
     public function index_public(GiteRepository $giteRepository): Response
     {   
         $user = $this->getUser();
+    
         return $this->render('gite/index_owner.html.twig', [
             'gites' => $giteRepository->findBy(['user' => $user])
         ]);
