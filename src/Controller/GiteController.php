@@ -28,6 +28,14 @@ class GiteController extends AbstractController
         ]);
     }
 
+    #[Route('/public', name: 'app_gite_public_index', methods: ['GET'])]
+    public function index_public(GiteRepository $giteRepository): Response
+    {
+        return $this->render('gite/index_public.html.twig', [
+            'gites' => $giteRepository->findAll(),
+        ]);
+    }
+
     #[Route('/new', name: 'app_gite_new', methods: ['GET', 'POST'])]
     public function new(Request $request, GiteRepository $giteRepository): Response
     {
@@ -66,6 +74,18 @@ class GiteController extends AbstractController
     {
         if ($gite) {
             return $this->render('gite/show.html.twig', [
+                'gite' => $gite,
+            ]);
+        } else {
+            $this->addFlash('error', "Cet ID n'appartient à aucun gîte.");
+        }
+    }
+
+    #[Route('/public/{id}', name: 'app_gite_public_show', methods: ['GET'])]
+    public function show_public(Gite $gite): Response
+    {
+        if ($gite) {
+            return $this->render('gite/show_public.html.twig', [
                 'gite' => $gite,
             ]);
         } else {

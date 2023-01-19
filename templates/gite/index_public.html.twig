@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nos Gîtes
+{% endblock %}
+
+{% block body %}
+
+	<section class="container">
+		<h1 class="">Nos gîtes</h1>
+		<div class="row">
+
+			<h2>Les nouveautés</h2>
+
+			<ul id="index-pu-ul" class="d-flex">
+				{% for gite in gites[-5:5] %}
+					<li class="list-item col-2 mx-2">
+						<picture>
+							<img src="../images/gites/{{ gite.imageName }}" class="img-fluid rounded-top" alt="{{ gite.name }}">
+						</picture>
+						<div>
+							<h3>{{ gite.name }}</h3>
+						</div>
+						<a class="btn btn-outline-info" href="{{ path('app_gite_show', {'id': gite.id}) }}">Voir</a>
+					</li>
+				{% else %}
+					<li>
+						<div class="alert alert-info">no records found</div>
+					</li>
+				{% endfor %}
+			</ul>
+		</div>
+	</section>
+
+
+{% endblock %}
