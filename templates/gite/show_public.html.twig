@@ -71,9 +71,13 @@
 							<td>
 								{% for giteservice in gite.giteServices %}
 									{{ giteservice.service.name }}
-									à
-									{{ giteservice.price }}
-									pesos<br>
+									{% if giteservice.price > 0  %}
+										à
+										{{ giteservice.price }}
+										pesos<br>
+									{% endif %}
+									<span>
+										(inclus)</span>
 								{% endfor %}
 							</td>
 						</tr>
@@ -84,6 +88,18 @@
 								{% for giteEqp in gite.eqps %}
 									{{ giteEqp.name }}
 									<br>
+								{% endfor %}
+							</td>
+						</tr>
+						<tr>
+							<th>Equipements ext
+							</th>
+							<td>
+								{% for giteEqp in gite.eqps %}
+									{% if giteEqp.type is same as("extérieur")  %}
+										{{ giteEqp.name }}
+										<br>
+									{% endif %}
 								{% endfor %}
 							</td>
 						</tr>
