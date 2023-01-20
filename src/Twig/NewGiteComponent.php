@@ -20,11 +20,11 @@ class NewGiteComponent extends AbstractController
     use DefaultActionTrait;
 
     #[LiveProp(fieldName: 'data')]
-    public ?Gite $gite = null ;
+    public ?Gite $gite = null;
 
     protected function instantiateForm(): FormInterface
-    {   
-        
+    {
+
         return $this->createForm(GiteType::class, $this->gite);
     }
 
@@ -39,27 +39,27 @@ class NewGiteComponent extends AbstractController
     {
         unset($this->formValues['giteServices'][$index]);
     }
-    #[LiveAction]
-    public function addGiteEqpExts()
-    {
-        $this->formValues['giteEqpExts'][] = [];
-    }
+    // #[LiveAction]
+    // public function addGiteEqpExts()
+    // {
+    //     $this->formValues['giteEqpExts'][] = [];
+    // }
 
-    #[LiveAction]
-    public function removeGiteEqpExts(#[LiveArg] int $index)
-    {
-        unset($this->formValues['giteEqpExts'][$index]);
-    }
-    
-    #[LiveAction]
-    public function addGiteEqpInts()
-    {
-        $this->formValues['giteEqpInts'][] = [];
-    }
+    // #[LiveAction]
+    // public function removeGiteEqpExts(#[LiveArg] int $index)
+    // {
+    //     unset($this->formValues['giteEqpExts'][$index]);
+    // }
 
-    #[LiveAction]
-    public function removeGiteInts(#[LiveArg] int $index)
-    {
-        unset($this->formValues['giteEqpInts'][$index]);
-    }
+    // #[LiveAction]
+    // public function addGiteEqpInts()
+    // {
+    //     $this->formValues['giteEqpInts'][] = [];
+    // }
+
+    // #[LiveAction]
+    // public function removeGiteInts(#[LiveArg] int $index)
+    // {
+    //     unset($this->formValues['giteEqpInts'][$index]);
+    // }
 }

@@ -74,25 +74,25 @@
 		</div>
 
 		{# <div class="row">
-																											<div class="col">
-																												{{ form_row(form.startRed, {'label': 'Début saison haute'}) }}
-																											</div>
-																											<div class="col">
-																												{{ form_row(form.endRed, {'label': 'Fin saison haute'}) }}
-																											</div>
-																										</div >	 	
-																										 #}
+																													<div class="col">
+																														{{ form_row(form.startRed, {'label': 'Début saison haute'}) }}
+																													</div>
+																													<div class="col">
+																														{{ form_row(form.endRed, {'label': 'Fin saison haute'}) }}
+																													</div>
+																												</div >	 	
+																												 #}
 
 		{# <div class="row">
-																										
-																										
-																											<div class="col">
-																												{{ form_row(form.giteEqpExts[0]['eqpExt'], {'label': 'Equipements extérieurs inclus'}) }}
-																											</div>
-																											<div class="col">
-																												{{ form_row(form.giteEqpInts[0]['eqpInt'], {'label': 'Equipements intérieur inclus'}) }}
-																											</div>
-																										</div> #}
+																												
+																												
+																													<div class="col">
+																														{{ form_row(form.giteEqpExts[0]['eqpExt'], {'label': 'Equipements extérieurs inclus'}) }}
+																													</div>
+																													<div class="col">
+																														{{ form_row(form.giteEqpInts[0]['eqpInt'], {'label': 'Equipements intérieur inclus'}) }}
+																													</div>
+																												</div> #}
 
 		<div class="row">
 			<div class="col">
@@ -119,8 +119,6 @@
 						</div>
 					{% endfor %}
 
-
-					{# avoid an extra label for this field #}
 					{% do form.giteServices.setRendered %}
 
 					<button class="btn btn-outline-info" data-action="live#action" data-action-name="addGiteServices" type="button">
@@ -128,54 +126,8 @@
 				</div>
 			</div>
 
-
-			{# <div class="col card ">
-																			<div class="card-body p-3">
-																				<h3 class="card-title">
-																					Equipements intérieurs
-																				</h3>
-																				{% for key, giteEqpIntsForm in form.giteEqpInts %}
-																					<div class="d-flex">
-																						<button data-action="live#action" data-action-name="removeGiteInts(index={{ key }})" type="button">
-																							<i class="fa-solid fa-trash lime"></i>
-																						</button>
-															
-																						{{ form_widget(giteEqpIntsForm) }}
-																					</div>
-																				{% endfor %} #}
-
-
-			{# {% do form.giteEqpInts.setRendered %}
-															
-																				<button data-action="live#action" data-action-name="addGiteEqpInts" type="button">
-																					Ajouter un équipement intérieur
-																				</button>
-																			</div>
-																		</div> #}
-			{# <div class="col card">
-																			<div class="card-body p-3">
-																				<h3 class="card-title">
-																					Equipements extérieurs
-																				</h3>
-																				{% for key, giteEqpExtsForm in form.giteEqpExts %}
-																					<div class="d-flex">
-																						<button class=" btn btn-dark btn-sm" data-action="live#action" data-action-name="removeGiteEqpExts(index={{ key }})" type="button">
-																							<i class="fa-solid fa-trash lime"></i>
-																						</button>
-															
-																						{{ form_widget(giteEqpExtsForm) }}
-																					</div>
-																				{% endfor %}
-															
-															
-																				{% do form.giteEqpExts.setRendered %}
-															
-																				<button data-action="live#action" data-action-name="addGiteEqpExts" type="button">
-																					Ajouter un équipement extérieur</button>
-																			</div>
-																		</div> #}
-
-				<div class="col"> {{ form_row(form.eqpExt, {'label': 'Equipements extérieurs'}) }}
+			<div class="col">
+				{{ form_row(form.eqpExt, {'label': 'Equipements extérieurs'}) }}
 			</div>
 			<div class="col">
 				{{ form_row(form.eqpInt, {'label': 'Equipements intérieurs'}) }}

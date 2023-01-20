@@ -54,15 +54,19 @@
 							<th>Animaux acceptés ?</th>
 							<td>{{ gite.animalAllowed ? 'Oui' : 'Non' }}</td>
 							{% if gite.animalAllowed and gite.animalFee > 0 %}
-								<tr><th> Supplément (animaux):</th>
+								<tr>
+									<th>
+										Supplément (animaux):</th>
 									<td>{{ gite.animalFee }}
-									€</td></tr>
+										€</td>
+								</tr>
 							{% endif %}
 						</tr>
 
 						<tr>
 							<th>Tarif hebdomadaire</th>
-							<td>{{ gite.greenPrice }} €</td>
+							<td>{{ gite.greenPrice }}
+								€</td>
 						</tr>
 
 						<tr>
@@ -76,12 +80,12 @@
 										{{ giteservice.price }}
 										pesos<br>
 									{% else %}
-									<span>(inclus)</span><br>
-										{% endif %}
+										<span>(inclus)</span><br>
+									{% endif %}
 								{% endfor %}
 							</td>
 						</tr>
-					<tr>
+						<tr>
 							<th>Equipement(s) intérieur(s)
 							</th>
 							<td>
@@ -107,11 +111,11 @@
 						</tr>
 					</tbody>
 				</table>
+				<div class="mb-2">
+					<a class="btn btn-info" href="{{ path('app_gite_index') }}">Retour à la list</a>
 
-				<a href="{{ path('app_gite_index') }}">back to list</a>
-
-				<a href="{{ path('app_gite_edit', {'id': gite.id}) }}">edit</a>
-
+					<a class="btn btn-warning" href="{{ path('app_gite_edit', {'id': gite.id}) }}">Modifier</a>
+				</div>
 				{{ include('gite/_delete_form.html.twig') }}
 			</div>
 		</div>

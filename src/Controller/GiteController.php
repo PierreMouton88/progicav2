@@ -23,25 +23,25 @@ class GiteController extends AbstractController
 {
     #[Route('/', name: 'app_gite_index', methods: ['GET'])]
     public function index(GiteRepository $giteRepository, EqpRepository $eqpRepository): Response
-    {  
+    {
         //  $find = $eqpRepository->findBy(['type'=>'extérieur']);
-        
-        
+
+
         // foreach ($find as $i => $k){
         //     $find[][$k] = $find[$i];
         // }
-       
+
         return $this->render('gite/index.html.twig', [
             'gites' => $giteRepository->findAll(),
-            'eqpexts' => $eqpRepository->findBy(['type'=>'extérieur'])
+            'eqpexts' => $eqpRepository->findBy(['type' => 'extérieur'])
         ]);
     }
 
     #[Route('/owner', name: 'app_gite_index_owner', methods: ['GET'])]
     public function index_public(GiteRepository $giteRepository): Response
-    {   
+    {
         $user = $this->getUser();
-    
+
         return $this->render('gite/index_owner.html.twig', [
             'gites' => $giteRepository->findBy(['user' => $user])
         ]);
@@ -108,11 +108,20 @@ class GiteController extends AbstractController
     public function edit(Request $request, Gite $gite, GiteRepository $giteRepository): Response
     {
         $form = $this->createForm(GiteType::class, $gite);
-
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $giteRepository->save($gite, true);
 
+        if ($form->isSubmitted() && $form->isValid()) {
+            $eqpExt = $form->get('eqpExt')->getData();
+            $eqpInt = $form->get('eqpInt')->getData();
+            $eqps = array_merge(
+                $eqpInt->toArray(),
+                $eqpExt->toArray()
+            );
+            foreach ($eqps as $eqp) {
+                $gite->addEqp($eqp);
+            }
+            $giteRepository->save($gite, true);
+            $this->addFlash('success', "Votre bien a bien été modifié");
             return $this->redirectToRoute('app_gite_index', [], Response::HTTP_SEE_OTHER);
         }
 
