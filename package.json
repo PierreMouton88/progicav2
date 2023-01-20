@@ -28,6 +28,8 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.2.1",
-    "sass-embedded": "^1.57.1"
+    "jquery": "^3.6.3",
+    "sass-embedded": "^1.57.1",
+    "select2": "^4.1.0-rc.0"
   }
 }
