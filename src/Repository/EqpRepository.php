@@ -39,28 +39,41 @@ class EqpRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return Eqp[] Returns an array of Eqp objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('e')
-//            ->andWhere('e.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('e.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    //    /**
+    //     * @return Eqp[] Returns an array of Eqp objects
+    //     */
+    public function findByText($value, $type): array
+    {
+        if ($type == 'ext') {
+            $type = Eqp::EXT;
+        } else if ($type == 'int') {
+            $type = Eqp::INT;
+        }
 
-//    public function findOneBySomeField($value): ?Eqp
-//    {
-//        return $this->createQueryBuilder('e')
-//            ->andWhere('e.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+        return $this->createQueryBuilder('e')
+            ->andWhere('e.name LIKE :val')
+            ->setParameter('val', '%' . $value . '%')
+            ->andWhere('e.type = :type ')
+            ->setParameter('type', $type)
+            ->getQuery()
+            ->getResult();
+    }
+
+    // public function findOneBySomeField($value): ?Eqp
+    // {
+    //     return $this->createQueryBuilder('e')
+    //         ->andWhere('e.exampleField = :val')
+    //         ->setParameter('val', $value)
+    //         ->getQuery()
+    //         ->getOneOrNullResult();
+    // }
+
+    public function findByType(string $type): array
+    {
+        return $this->createQueryBuilder('e')
+            ->andWhere('e.type = :val')
+            ->setParameter('val', $type)
+            ->getQuery()
+            ->getResult();
+    }
 }

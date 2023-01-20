@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Eqp;
 use App\Entity\Gite;
 use App\Entity\GiteEqpExt;
 use App\Entity\GiteEqpInt;
@@ -15,33 +16,47 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\SerializerInterface;
 
 use function PHPSTORM_META\type;
 
 #[Route('/gite')]
 class GiteController extends AbstractController
 {
-    #[Route('/', name: 'app_gite_index', methods: ['GET'])]
-    public function index(GiteRepository $giteRepository, EqpRepository $eqpRepository): Response
-    {  
-        //  $find = $eqpRepository->findBy(['type'=>'extérieur']);
-        
-        
-        // foreach ($find as $i => $k){
-        //     $find[][$k] = $find[$i];
-        // }
-       
+    #[Route('/', name: 'app_gite_index', methods: ['GET', 'POST'])]
+    public function index(GiteRepository $giteRepository, EqpRepository $eqpRepository, Request $request): Response
+    {
+        if ($request->isMethod('POST')) {
+            dd($request->request->all());
+        }
         return $this->render('gite/index.html.twig', [
             'gites' => $giteRepository->findAll(),
-            'eqpexts' => $eqpRepository->findBy(['type'=>'extérieur'])
         ]);
+    }
+    #[Route('/api/equipement/{type}', name: 'app_gite_api_equipement', methods: ['GET'])]
+    public function equipement(EqpRepository $eqpRepository, SerializerInterface $serializer, Request $request, string $type)
+    {
+        $term = $request->query->get('term');
+
+        if (!$term) {
+            return $this->json(null);
+        }
+        $equipement = $serializer->serialize($eqpRepository->findByText($term, $type), 'json', [
+            'groups' => [
+                'eqp'
+            ]
+        ]);
+
+        return $this->json(
+            $equipement
+        );
     }
 
     #[Route('/owner', name: 'app_gite_index_owner', methods: ['GET'])]
     public function index_public(GiteRepository $giteRepository): Response
-    {   
+    {
         $user = $this->getUser();
-    
+
         return $this->render('gite/index_owner.html.twig', [
             'gites' => $giteRepository->findBy(['user' => $user])
         ]);
