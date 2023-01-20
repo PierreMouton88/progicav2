@@ -23,16 +23,6 @@ use function PHPSTORM_META\type;
 #[Route('/gite')]
 class GiteController extends AbstractController
 {
-    #[Route('/', name: 'app_gite_index', methods: ['GET'])]
-    public function index(GiteRepository $giteRepository, EqpRepository $eqpRepository): Response
-    {
-        //  $find = $eqpRepository->findBy(['type'=>'extérieur']);
-
-
-        // foreach ($find as $i => $k){
-        //     $find[][$k] = $find[$i];
-        // }
-
     #[Route('/', name: 'app_gite_index', methods: ['GET', 'POST'])]
     public function index(GiteRepository $giteRepository, EqpRepository $eqpRepository, Request $request): Response
     {
@@ -41,7 +31,7 @@ class GiteController extends AbstractController
         }
         return $this->render('gite/index.html.twig', [
             'gites' => $giteRepository->findAll(),
-            'eqpexts' => $eqpRepository->findBy(['type'=>'extérieur'])
+            'eqpexts' => $eqpRepository->findBy(['type' => 'extérieur'])
         ]);
     }
     #[Route('/api/equipement/{type}', name: 'app_gite_api_equipement', methods: ['GET'])]
