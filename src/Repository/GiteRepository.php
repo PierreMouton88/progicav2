@@ -39,28 +39,44 @@ class GiteRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return Gite[] Returns an array of Gite objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('g')
-//            ->andWhere('g.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('g.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    /**
+     * @return Gite[] Returns an array of Gite objects
+     */
+    public function findByExampleField($value): array
+    {
 
-//    public function findOneBySomeField($value): ?Gite
-//    {
-//        return $this->createQueryBuilder('g')
-//            ->andWhere('g.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+
+        return $this->createQueryBuilder('g')
+            ->andWhere('g.exampleField = :val')
+            ->setParameter('val', $value)
+            ->orderBy('g.id', 'ASC')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult();
+    }
+
+    // public function findOneByIdJoinedToEqp(): ?Gite
+    // {
+
+    //     $entityManager = $this->getEntityManager();
+
+    //     $query = $entityManager->createQuery(
+    //         'SELECT p, c
+    //         FROM App\Entity\Gite p
+    //         INNER JOIN p.eqps c
+    //         WHERE p.id = :id'
+    //     )->setParameter('id', $Id);
+
+    //     return $query->getOneOrNullResult();
+    // }
+
+    //    public function findOneBySomeField($value): ?Gite
+    //    {
+    //        return $this->createQueryBuilder('g')
+    //            ->andWhere('g.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->getQuery()
+    //            ->getOneOrNullResult()
+    //        ;
+    //    }
 }
