@@ -16,13 +16,13 @@ class CroppingController extends AbstractController
     public function index(CropperInterface $cropper, Request $request): Response
     {
         $crop = $cropper->createCrop('/images/our_images/first_slide2.jpg');
-        $crop->setCroppedMaxSize(1500, 1500);
+        $crop->setCroppedMaxSize(1300, 1000);
 
         $form = $this->createFormBuilder(['crop' => $crop])
             ->add('crop', CropperType::class, [
                 'public_url' => '/images/our_images/first_slide.jpg',
                 'cropper_options' => [
-                    'aspectRatio' => 1500 / 1500,
+                    'aspectRatio' => 1300 / 1000,
                 ],
             ])
             ->getForm();
@@ -34,7 +34,7 @@ class CroppingController extends AbstractController
             $crop->getCroppedImage();
             dd($crop);
             // Create a thumbnail of the cropped image (as a string)
-            $crop->getCroppedThumbnail(150, 150);
+            $crop->getCroppedThumbnail(130, 100);
 
             // ...
         }

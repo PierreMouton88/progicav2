@@ -5,67 +5,22 @@
 
 {% block body %}
 	<div class="container-fluid bg-image" style="background-image: url('{{ asset('/images/our_images/Spanish_holiday_home.jpg') }} '); background-size: cover;
-																																																																																																																																																												background-repeat: no-repeat; height:60vh">
-		<div
-			class="row p-3 ">
+																																																																																																																																																																																																																																																																																																																																	background-repeat: no-repeat; height:60vh">
+		<div class="row p-3 ">
 
-			{# <form class="d-flex justify-content-center " method="POST">
-																<div class="col-2"></div>
-																<div class="col-8 p-3 my-5 bg-light  rounded" {{ stimulus_controller('searchGite') }}>
-																	<h3>Rechercher un gîte</h3>
-																	<div class="p-1">
-																		<span>Type de service recherché :
-																		</span>
-																		<select class=""></select>
-																	</div>
-																	<div class="p-1">
-																		<span>Type d'équipement intérieur recherché :
-																		</span>
-																		<select class="eqpint form-select" name="eqpints[]" multiple="multiple"></select>
-																	</div>
-																	<div class="p-1">
-																		<span>Type d'équipement extérieur recherché :
-																		</span>
-																		<select class="eqpext form-select" name="eqpexts[]" multiple="multiple"></select>
-																	</div>
-																	<div class="text-center mt-2">
-																		<button type="submit" class="btn btn-primary">Rechercher</button>
-																	</div>
-																</div>
-																<div class="col-2"></div>
-															</form> #}
 
 			{{ form_start (formSearch)}}
 
 			{{ form_end (formSearch)}}
 
-			{% if giteSearch %}
-				<div>
-					{% for gite in gitesSearch %}
-						<li id="" class="list-group-item col-2 mx-2 rounded ">
-							<picture>
-								<img src="../images/gites/{{ gite.imageName }}" class="img-fluid rounded-top " alt="{{ gite.name }}">
-							</picture>
-							<div>
-								<h4 class="text-center">{{ gite.name }}</h4>
-							</div>
-							<div>
-								<p class="text-center">{{ gite.city }}</p>
-							</div>
-							<div class="text-center p-2">
-								<a class="btn btn-outline-info" href="{{ path('app_gite_show', {'id': gite.id}) }}">Voir</a>
-							</div>
-						</li>
-					{% endfor %}
-				</div>
-			{% endif %}
+
 		</div>
 
 
 	</div>
 
 
-	<section class="container-fluid ">
+	<section id="selection" class="container-fluid ">
 		<h1 class="">Nos gîtes</h1>
 		<div class="row">
 
@@ -74,18 +29,20 @@
 			<ul class="d-flex justify-content-center ">
 
 				{% for gite in gites[-5:5] %}
-					<li id="index-pu-ul" class="list-group-item col-2 mx-2 rounded ">
+					<li id="index-pu-ul" style="min-height: 25rem" class="card  list-group-item col-2 mx-2 rounded ">
 						<picture>
 							<img src="../images/gites/{{ gite.imageName }}" class="img-fluid rounded-top " alt="{{ gite.name }}">
 						</picture>
-						<div>
-							<h4 class="text-center">{{ gite.name }}</h4>
-						</div>
-						<div>
-							<p class="text-center">{{ gite.city }}</p>
+						<div class="card-body">
+							<div>
+								<h4 class="text-center">{{ gite.name }}</h4>
+							</div>
+							<div>
+								<p class="text-center">{{ gite.city }}</p>
+							</div>
 						</div>
 						<div class="text-center p-2">
-							<a class="btn btn-outline-info" href="{{ path('app_gite_show', {'id': gite.id}) }}">Voir</a>
+							<a class="mb-3 position-absolute bottom-0 start-50 translate-middle-x btn btn-outline-info" href="{{ path('app_gite_show', {'id': gite.id}) }}">Voir</a>
 						</div>
 					</li>
 				{% else %}
@@ -102,44 +59,44 @@
 
 	</section>
 	<section id="all" class="container-fluid bg-secondary">
-		<div class="row">
+		<div class="row justify-content-center">
 
-
-			<ul class="d-flex justify-content-center p-3 ">
-
-				{% for gite in gites %}
-					<li id="index-pu-ul" class="list-group-item col-2 mx-2 rounded">
+			{% for gite in gites %}
+				{# <div class="row"> #}
+				<div class=" col-2 m-2 rounded">
+					<div class="card" style="min-height: 18rem" width="18rem">
 						<picture>
-							<img src="../images/gites/{{ gite.imageName }}" class="img-fluid rounded-top " alt="{{ gite.name }}">
+							<img src="../images/gites/{{ gite.imageName }}" class="img-fluid card-image-top" alt="{{ gite.name }}">
 						</picture>
-						<div>
-							<h4 class="text-center">{{ gite.name }}</h4>
-						</div>
-						<div>
-							<p class="text-center">{{ gite.city }}</p>
+						<div class="card-body">
+							<div>
+								<h4 class="text-center">{{ gite.name }}</h4>
+							</div>
+							<div>
+								<p class="text-center">{{ gite.city }}</p>
+							</div>
+
 						</div>
 						<div class="text-center p-2">
-							<a class="btn btn-outline-info" href="{{ path('app_gite_show', {'id': gite.id}) }}">Voir</a>
+							<a class="mb-3 position-absolute bottom-0 start-50 translate-middle-x btn btn-outline-info" href="{{ path('app_gite_show', {'id': gite.id}) }}">Voir</a>
 						</div>
-					</li>
-				{% else %}
-					<li>
-						<div class="alert alert-info">no records found</div>
-					</li>
-				{% endfor %}
+					</div>
+				</div>
 
-			</ul>
+			{% else %}
+				<li>
+					<div class="alert alert-info">no records found</div>
+				</li>
+			{% endfor %}
+
 		</div>
-	</section>
-
-{% endblock %}
-
-{# {% block javascripts %}
-	{{ parent()}}
-	{{ encore_entry_script_tags('searchGite') }}
-{% endblock %}
-
-{% block stylesheets %}
-	{{ parent()}}
-	{{ encore_entry_link_tags('searchGite') }}
-{% endblock %} #}
+	</div>
+</section>{% endblock %}{# {% block javascripts %}
+																																								{{ parent()}}
+																																								{{ encore_entry_script_tags('searchGite') }}
+																																							{% endblock %}
+																																							
+																																							{% block stylesheets %}
+																																								{{ parent()}}
+																																								{{ encore_entry_link_tags('searchGite') }}
+																																							{% endblock %} #}

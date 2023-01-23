@@ -27,15 +27,12 @@ class GiteController extends AbstractController
     #[Route('/', name: 'app_gite_index', methods: ['GET', 'POST'])]
     public function index(GiteRepository $giteRepository, EqpRepository $eqpRepository, Request $request): Response
     {
-        $id = $eqpRepository->findBy(['eqp']);
-        dd($id);
         $gite = new Gite;
         $formsearch = $this->createForm(SearchType::class, $gite);
         $formsearch->handleRequest($request);
         if ($formsearch->isSubmitted() && $formsearch->isValid()) {
             return $this->render('gite/index.html.twig', [
                 'gites' => $giteRepository->findAll(),
-                'gitesSearch' => $giteRepository->findOneByIdJoinedToEqp($id),
                 'formSearch' => $formsearch
             ]);
         }
