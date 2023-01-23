@@ -9,6 +9,7 @@ use App\Entity\GiteEqpInt;
 use App\Entity\GiteService;
 use App\Entity\User;
 use App\Form\GiteType;
+use App\Form\SearchType;
 use App\Repository\EqpRepository;
 use App\Repository\GiteRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -26,12 +27,23 @@ class GiteController extends AbstractController
     #[Route('/', name: 'app_gite_index', methods: ['GET', 'POST'])]
     public function index(GiteRepository $giteRepository, EqpRepository $eqpRepository, Request $request): Response
     {
-        if ($request->isMethod('POST')) {
-            dd($request->request->all());
+        $id = $eqpRepository->findBy(['eqp']);
+        dd($id);
+        $gite = new Gite;
+        $formsearch = $this->createForm(SearchType::class, $gite);
+        $formsearch->handleRequest($request);
+        if ($formsearch->isSubmitted() && $formsearch->isValid()) {
+            return $this->render('gite/index.html.twig', [
+                'gites' => $giteRepository->findAll(),
+                'gitesSearch' => $giteRepository->findOneByIdJoinedToEqp($id),
+                'formSearch' => $formsearch
+            ]);
         }
+
         return $this->render('gite/index.html.twig', [
             'gites' => $giteRepository->findAll(),
-            'eqpexts' => $eqpRepository->findBy(['type' => 'extérieur'])
+            // 'eqpexts' => $eqpRepository->findBy(['type' => 'extérieur']),
+            'formSearch' => $formsearch
         ]);
     }
     #[Route('/api/equipement/{type}', name: 'app_gite_api_equipement', methods: ['GET'])]
@@ -52,6 +64,32 @@ class GiteController extends AbstractController
             $equipement
         );
     }
+    #[Route('/search', name: 'app_gite_search', methods: ['GET', 'POST'])]
+    public function search_gite(GiteRepository $giteRepository, EqpRepository $eqpRepository, Request $request): Response
+    {
+
+
+        // $value->handleRequest($request);
+        // dd($id);
+        // $gite = new Gite;
+        $formsearch = $this->createForm(SearchType::class);
+        $formsearch->handleRequest($request);
+
+
+        if ($formsearch->isSubmitted() && $formsearch->isValid()) {
+            $value = $formsearch->get('eqpInt')->getData();
+            // dd($value);
+            return $this->render('gite/search.html.twig', [
+                'gitesSearch' => $eqpRepository->findBygite($value),
+
+                'formSearch' => $formsearch
+            ]);
+        }
+        return $this->render('gite/search.html.twig', [
+            'formSearch' => $formsearch
+        ]);
+    }
+
 
     #[Route('/owner', name: 'app_gite_index_owner', methods: ['GET'])]
     public function index_public(GiteRepository $giteRepository): Response

@@ -5,35 +5,60 @@
 
 {% block body %}
 	<div class="container-fluid bg-image" style="background-image: url('{{ asset('/images/our_images/Spanish_holiday_home.jpg') }} '); background-size: cover;
-																																																																																																																																																background-repeat: no-repeat; height:60vh">
-		<div class="row p-3 ">
+																																																																																																																																																												background-repeat: no-repeat; height:60vh">
+		<div
+			class="row p-3 ">
 
-			<form class="d-flex justify-content-center " method="POST">
-				<div class="col-2"></div>
-				<div class="col-8 p-3 my-5 bg-light  rounded" {{ stimulus_controller('searchGite') }}>
-					<h3>Rechercher un gîte</h3>
-					<div class="p-1">
-						<span>Type de service recherché :
-						</span>
-						<select class=""></select>
-					</div>
-					<div class="p-1">
-						<span>Type d'équipement intérieur recherché :
-						</span>
-						<select class="eqpint form-select" name="eqpints[]" multiple="multiple"></select>
-					</div>
-					<div class="p-1">
-						<span>Type d'équipement extérieur recherché :
-						</span>
-						<select class="eqpext form-select" name="eqpexts[]" multiple="multiple"></select>
-					</div>
-					<div class="text-center mt-2">
-						<button type="submit" class="btn btn-primary">Rechercher</button>
-					</div>
+			{# <form class="d-flex justify-content-center " method="POST">
+																<div class="col-2"></div>
+																<div class="col-8 p-3 my-5 bg-light  rounded" {{ stimulus_controller('searchGite') }}>
+																	<h3>Rechercher un gîte</h3>
+																	<div class="p-1">
+																		<span>Type de service recherché :
+																		</span>
+																		<select class=""></select>
+																	</div>
+																	<div class="p-1">
+																		<span>Type d'équipement intérieur recherché :
+																		</span>
+																		<select class="eqpint form-select" name="eqpints[]" multiple="multiple"></select>
+																	</div>
+																	<div class="p-1">
+																		<span>Type d'équipement extérieur recherché :
+																		</span>
+																		<select class="eqpext form-select" name="eqpexts[]" multiple="multiple"></select>
+																	</div>
+																	<div class="text-center mt-2">
+																		<button type="submit" class="btn btn-primary">Rechercher</button>
+																	</div>
+																</div>
+																<div class="col-2"></div>
+															</form> #}
+
+			{{ form_start (formSearch)}}
+
+			{{ form_end (formSearch)}}
+
+			{% if giteSearch %}
+				<div>
+					{% for gite in gitesSearch %}
+						<li id="" class="list-group-item col-2 mx-2 rounded ">
+							<picture>
+								<img src="../images/gites/{{ gite.imageName }}" class="img-fluid rounded-top " alt="{{ gite.name }}">
+							</picture>
+							<div>
+								<h4 class="text-center">{{ gite.name }}</h4>
+							</div>
+							<div>
+								<p class="text-center">{{ gite.city }}</p>
+							</div>
+							<div class="text-center p-2">
+								<a class="btn btn-outline-info" href="{{ path('app_gite_show', {'id': gite.id}) }}">Voir</a>
+							</div>
+						</li>
+					{% endfor %}
 				</div>
-				<div class="col-2"></div>
-			</form>
-
+			{% endif %}
 		</div>
 
 
