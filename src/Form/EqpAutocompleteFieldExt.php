@@ -3,7 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Eqp;
-use App\Repository\EqpRepository;
+use App\Repository\GiteRepository;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -17,19 +17,19 @@ class EqpAutocompleteFieldExt extends AbstractType
     {
         $resolver->setDefaults([
             'class' => Eqp::class,
-            'placeholder' => 'Choose a Eqp',
+            'placeholder' => 'Equipements extérieurs',
             'choice_label' => 'name',
             'multiple' => true,
-            'filter_query' => function (QueryBuilder $qb, string $query, EqpRepository $repository) {
+            'filter_query' => function (QueryBuilder $qb, string $query) {
 
 
                 $qb->andWhere('entity.name LIKE :filter')
                     ->setParameter('filter', '%' . $query . '%')
                     ->andWhere('entity.type = :type')
                     ->setParameter('type', Eqp::EXT);
-            }
-            // 'query_builder' => function(EqpRepository $eqpRepository) {
-            //     return $eqpRepository->createQueryBuilder('eqp');
+            },
+            // 'query_builder' => function (GiteRepository $giteRepository) {
+            //     return $giteRepository->createQueryBuilder('eqps');
             // },
             //'security' => 'ROLE_SOMETHING',
         ]);

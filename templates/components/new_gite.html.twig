@@ -73,27 +73,6 @@
 			</div>
 		</div>
 
-		{# <div class="row">
-																													<div class="col">
-																														{{ form_row(form.startRed, {'label': 'Début saison haute'}) }}
-																													</div>
-																													<div class="col">
-																														{{ form_row(form.endRed, {'label': 'Fin saison haute'}) }}
-																													</div>
-																												</div >	 	
-																												 #}
-
-		{# <div class="row">
-																												
-																												
-																													<div class="col">
-																														{{ form_row(form.giteEqpExts[0]['eqpExt'], {'label': 'Equipements extérieurs inclus'}) }}
-																													</div>
-																													<div class="col">
-																														{{ form_row(form.giteEqpInts[0]['eqpInt'], {'label': 'Equipements intérieur inclus'}) }}
-																													</div>
-																												</div> #}
-
 		<div class="row">
 			<div class="col">
 				{{ form_row(form.startRed, {'label': 'Début saison haute'}) }}
@@ -125,7 +104,22 @@
 						Ajouter un service</button>
 				</div>
 			</div>
+			<div class="col">
+				{% if gite %}
+					{% for eqp in gite.eqps %}
+						<div>
+							<span class="btn ms-2">
+								<button class="btn" type="button">
+									<i class="fa-solid fa-trash lime"></i>
+								</button>
+							</span>
+							{{ eqp.name }}
+							({{ eqp.type }})
+						</div>
+					{% endfor %}
+				{% endif %}
 
+			</div>
 			<div class="col">
 				{{ form_row(form.eqpExt, {'label': 'Equipements extérieurs'}) }}
 			</div>
@@ -135,8 +129,20 @@
 
 		</div>
 		<div class="row">
+			<div class="col">{{ form_widget(form.imageFile, {'label': 'Photo de votre bien'}) }}
+			</div>
 			<div class="col">
-				{{ form_row(form.imageFile, {'label': 'Photo de votre bien'}) }}
+				{% if gite %}
+
+					<span class="btn ms-2">
+						<button class="btn" type="button">
+							<i class="fa-solid fa-trash lime"></i>
+						</button>
+					</span>
+					{# {{ form_widget(form.imageFile) }} #}
+					<img class="rounded-4" width="20%" src="{{ vich_uploader_asset(gite, 'imageFile') }}" alt="{{ gite.imageName }}">
+				{% endif %}
+
 			</div>
 		</div>
 
