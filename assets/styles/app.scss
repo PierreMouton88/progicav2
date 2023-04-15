@@ -14,13 +14,16 @@ $text-color: #eee;
 
 .btn-style {
   border: 3px solid $text-color;
-  border-radius: 0;
   width: 15%;
   background-color: $main-color;
+  border-radius: 0;
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
   -ms-border-radius: 0;
   -o-border-radius: 0;
+  :hover {
+    background-color: #8567fc;
+  }
 }
 
 .arapey {
